@@ -9,13 +9,13 @@
     </span>
     </a>
     <a href="index.html" class="navbar-brand logo">
-    <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+    <img src="Assets/img/logo.png" class="img-fluid" alt="Logo">
     </a>
     </div>
     <div class="main-menu-wrapper">
     <div class="menu-header">
     <a href="index.html" class="menu-logo">
-    <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+    <img src="Assets/img/logo.png" class="img-fluid" alt="Logo">
     </a>
     <a id="menu_close" class="menu-close" href="javascript:void(0);">
     <i class="fas fa-times"></i>
@@ -114,8 +114,8 @@
     </ul>
     </div>
     <ul class="nav header-navbar-rht reg-head">
-    <li><a href="register.html" class="reg-btn"><img src="assets/img/icon/reg-icon.svg" class="me-1" alt="icon"> Register</a></li>
-    <li><a href="login.html" class="log-btn"><img src="assets/img/icon/lock-icon.svg" class="me-1" alt="icon"> Login</a></li>
+    <li><a href="register.html" class="reg-btn"><img src="Assets/img/icon/reg-icon.svg" class="me-1" alt="icon"> Register</a></li>
+    <li><a href="login.html" class="log-btn"><img src="Assets/img/icon/lock-icon.svg" class="me-1" alt="icon"> Login</a></li>
     <li><a href="post-project.html" class="login-btn">Post a Project </a></li>
     </ul>
     </nav>
