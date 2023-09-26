@@ -10,7 +10,7 @@
                     <a href="categories.html"><i data-feather="copy"></i> <span>Categories</span></a>
                 </li>
                 <li>
-                    <a href="projects.html"><i data-feather="database"></i> <span>Projects</span></a>
+                    <a href="{{route('admin.gigs')}}"><i data-feather="database"></i> <span>Gigs</span></a>
                 </li>
                 <li>
                     <a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>

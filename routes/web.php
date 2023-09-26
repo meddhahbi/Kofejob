@@ -17,10 +17,11 @@ Route::get('/', function () {
     return view('Front.Home');
 });
 
-Route::get('/employeer', function () {
-    return view('Admin.Includes.Dashboard');
-});
+
+
 
 // Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
