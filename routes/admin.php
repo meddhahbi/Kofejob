@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\GigController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', function () {
-    return view('Admin.Dashboard');
-});
+// Route::get('/admin', function () {
+//     return view('Admin.Dashboard');
+// });
+ 
+
+Route::get('/gigs',[GigController::class, 'index'])->name('admin.gigs');
+
 
 
 Route::group(['middleware' => 'guest:admin'], function () {
