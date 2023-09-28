@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GigController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('Front.Home');
-});
+// Route::get('/', function () {
+//     return view('Front.Home');
+// });
 
 
 
 
 // Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('Home');
+
+
+Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add');
+Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');
+
 
 

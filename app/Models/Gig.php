@@ -14,7 +14,6 @@ class Gig extends Model
         'description',
         'orders',
         'price',
-        'image',
     ];
 
 

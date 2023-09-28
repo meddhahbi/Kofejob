@@ -116,7 +116,7 @@
     <ul class="nav header-navbar-rht reg-head">
     <li><a href="register.html" class="reg-btn"><img src="Assets/img/icon/reg-icon.svg" class="me-1" alt="icon"> Register</a></li>
     <li><a href="login.html" class="log-btn"><img src="Assets/img/icon/lock-icon.svg" class="me-1" alt="icon"> Login</a></li>
-    <li><a href="post-project.html" class="login-btn">Post a Project </a></li>
+    <li><a href="{{route('Front.Gig.Add')}}" class="login-btn">Post a Gig </a></li>
     </ul>
     </nav>
     </header>
