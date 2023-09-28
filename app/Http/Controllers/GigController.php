@@ -14,6 +14,17 @@ class GigController extends Controller
     }
 
 
+
+    public function indexForFreelancer(){
+
+      $gigs = Gig::select();
+      return view('Front.Gig.index', compact('gigs'));
+
+    }
+
+
+
+
     public function create(){
         return view('Front.Gig.Add');
     }

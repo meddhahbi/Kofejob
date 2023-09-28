@@ -15,20 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('Front.Home');
-// });
+Route::get('/dash', function () {
+    return view('Front.Dashboard');
+});
 
 
 
 
 // Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('Home');
+Route::get('/', [HomeController::class, 'index'])->name('Home');
 
 
 Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add');
 Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');
 
+Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index');
 
 

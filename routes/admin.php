@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/admin', function () {
-//     return view('Admin.Dashboard');
-// });
+Route::get('/', function () {
+    return view('Admin.Home');
+});
  
 
 Route::get('/gigs',[GigController::class, 'index'])->name('admin.gigs');
