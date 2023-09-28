@@ -24,8 +24,8 @@ Route::get('/gigs',[GigController::class, 'index'])->name('admin.gigs');
 
 
 
-Route::group(['middleware' => 'guest:admin'], function () {
+// Route::group(['middleware' => 'guest:admin'], function () {
    
-    Route::get('login',[AdminLoginController::class, 'getLogin']);
+//     Route::get('login',[AdminLoginController::class, 'getLogin']);
 
-});
+// });
