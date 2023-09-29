@@ -15,10 +15,4 @@ class Gig extends Model
         'orders',
         'price',
     ];
-
-
-
-    public function scopeSelection($query){
-        return $query->select('title','description','orders','price','created_at');
-    }
 }

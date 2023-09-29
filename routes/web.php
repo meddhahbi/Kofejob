@@ -30,6 +30,16 @@ Route::get('/', [HomeController::class, 'index'])->name('Home');
 Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add');
 Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');
 
+
+Route::get('edit/{id}',[GigController::class,'edit'])->name('Front.Gig.Edit');
+Route::post('update/{id}',[GigController::class,'update'])->name('Front.Gig.update');
+
+
+Route::get('delete/{id}',[GigController::class,'destroy'])->name('Front.Gig.delete');
+
+
+
+
 Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index');
 
 
