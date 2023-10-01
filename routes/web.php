@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GigController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CondidatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,23 @@ Route::get('/dash', function () {
 Route::get('/', [HomeController::class, 'index'])->name('Home');
 
 
+
+
+Route::get('/condidats', [CondidatController::class, 'index'])->name('Front.Condidat.index');
+Route::get('/condidats/create', [CondidatController::class, 'create'])->name('Front.Condidat.create');
+Route::post('/condidats/store', [CondidatController::class, 'store'])->name('Front.Condidat.store');
+Route::get('/condidats/edit/{id}', [CondidatController::class, 'edit'])->name('Front.Condidat.edit');
+Route::post('/condidats/update/{id}', [CondidatController::class, 'update'])->name('Front.Condidat.update');
+Route::delete('/condidats/destroy/{id}', [CondidatController::class, 'destroy'])->name('Front.Condidat.destroy');
+
+
+
+Route::get('/condidatsAdmin', [CondidatController::class, 'indexx'])->name('Admin.Condidat.index');
+Route::get('/condidatsAdmin/show/{id}', [CondidatController::class, 'show'])->name('Admin.Condidat.show');
+Route::delete('/condidatsAdmin/destroy/{id}', [CondidatController::class, 'destroyy'])->name('Admin.Condidat.destroy');
+
+
+
 Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add');
 Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');
 
@@ -41,5 +59,7 @@ Route::get('delete/{id}',[GigController::class,'destroy'])->name('Front.Gig.dele
 
 
 Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index');
+
+
 
 
