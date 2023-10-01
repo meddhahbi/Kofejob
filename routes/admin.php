@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\GigController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AlertController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,12 @@ Route::get('/', function () {
 
 Route::get('/gigs',[GigController::class, 'index'])->name('admin.gigs');
 
+Route::get('/alerts',[AlertController::class, 'index'])->name('admin.alerts');
 
+//route to delete alert with alertId
+Route:
+
+Route::get('/deleteAlert/{id}',[AlertController::class, 'destroy'])->name('admin.alerts.delete');
 
 // Route::group(['middleware' => 'guest:admin'], function () {
    

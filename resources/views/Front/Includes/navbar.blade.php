@@ -107,11 +107,23 @@
     <li><a href="blog-grid.html">Blog Grid</a></li>
     <li><a href="blog-details.html">Blog Details</a></li>
     </ul>
-    </li>
+   
+    </li> <li class="has-submenu">
+    <a href>Alert <i class="fas fa-chevron-down"></i></a>
+    <ul class="submenu">
+    <li><a href="{{route('Front.Alert.Add')}}">My Alert</a></li>
+    <li><a href="{{route('Front.Alert.Add')}}">Add Alert</a></li>
+  
+    </ul>
+    <li>
+    </li> <li>
+ 
+   
     <li>
     <a href="admin/index.html" target="_blank">Admin</a>
     </li>
     </ul>
+   
     </div>
     <ul class="nav header-navbar-rht reg-head">
     <li><a href="register.html" class="reg-btn"><img src="Assets/img/icon/reg-icon.svg" class="me-1" alt="icon"> Register</a></li>
