@@ -14,10 +14,14 @@
 
     <link rel="stylesheet" href="{{ asset('Assets/plugins/fontawesome/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('Assets/plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('Assets/plugins/datatables/datatables.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('Assets/plugins/select2/css/select2.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('Assets/css/style.css') }}">
+
+
+
 </head>
 
 <body class="dashboard-page">
@@ -70,8 +74,15 @@
 
     <script src="{{ asset('Assets/plugins/theia-sticky-sidebar/ResizeSensor.js') }}"></script>
     <script src="{{ asset('Assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js') }}"></script>
+    <script src="{{ asset('Assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('Assets/plugins/datatables/datatables.min.js') }}"></script>
+
 
     <script src="{{ asset('Assets/js/script.js') }}"></script>
+
+
+
+
 </body>
 
 <!-- Mirrored from kofejob.dreamguystech.com/template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2023 20:20:24 GMT -->
