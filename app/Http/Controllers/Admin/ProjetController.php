@@ -126,4 +126,10 @@ class ProjetController extends Controller
         $projets=Projet::all();
         return view('Front.Project.projet')->with('projets',$projets);
     }
+    public function indexFront2()
+    {
+        //
+        $projets=Projet::all();
+        return view('Front.Project.index')->with('projets',$projets);
+    }
 }

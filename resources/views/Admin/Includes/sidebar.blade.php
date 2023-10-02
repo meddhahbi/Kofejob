@@ -7,10 +7,13 @@
                     <a href="index.html"><i data-feather="home"></i> <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="categories.html"><i data-feather="copy"></i> <span>Categories</span></a>
+                    <a href="{{route('category.index')}}"><i data-feather="copy"></i> <span>Categories</span></a>
                 </li>
                 <li>
                     <a href="{{route('admin.gigs')}}"><i data-feather="database"></i> <span>Gigs</span></a>
+                </li>
+                <li>
+                    <a href="{{route('projet.index')}}"><i data-feather="database"></i> <span>Projects</span></a>
                 </li>
                 <li>
                     <a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>

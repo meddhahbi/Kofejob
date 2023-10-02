@@ -62,8 +62,8 @@
     <li class="has-submenu">
     <a href="#">Projects</a>
     <ul class="submenu">
-    <li><a href="project.html">Projects</a></li>
-    <li><a href="project-details.html">Project Details</a></li>
+        <li><a href="{{ route('projet.indexFront') }}">Projects</a></li>
+    <li><a href="{{ route('projet.indexFront2') }}">Project Details</a></li>
     </ul>
     </li>
     <li><a href="freelancer-dashboard.html">Dashboard</a></li>

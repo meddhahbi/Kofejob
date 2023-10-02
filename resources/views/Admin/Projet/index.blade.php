@@ -142,79 +142,7 @@
         </div>
 
 
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner slimscroll">
-                <div id="sidebar-menu" class="sidebar-menu">
-                    <ul>
-                        <li class="menu-title"><span>Main</span></li>
-                        <li>
-                            <a href="index.html"><i data-feather="home"></i> <span>Dashboard</span></a>
-                        </li>
-                        <li>
-                            <a href="categories.html"><i data-feather="copy"></i> <span>Categories</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="projects.html"><i data-feather="database"></i> <span>Projects</span></a>
-                        </li>
-                        <li>
-                            <a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
-                        </li>
-                        <li>
-                            <a href="deposit.html"><i data-feather="user-check"></i> <span>Deposit</span></a>
-                        </li>
-                        <li>
-                            <a href="withdrawn.html"><i data-feather="user-check"></i> <span>Withdrawn</span></a>
-                        </li>
-                        <li>
-                            <a href="transaction.html"><i data-feather="clipboard"></i> <span>Transaction</span></a>
-                        </li>
-                        <li>
-                            <a href="providers.html"><i data-feather="user-check"></i> <span>Providers</span></a>
-                        </li>
-                        <li>
-                            <a href="subscription.html"><i data-feather="user-check"></i> <span>Subscription</span></a>
-                        </li>
-                        <li>
-                            <a href="reports.html"><i data-feather="pie-chart"></i> <span>Reports</span></a>
-                        </li>
-                        <li>
-                            <a href="roles.html"><i data-feather="clipboard"></i> <span>Roles</span></a>
-                        </li>
-                        <li>
-                            <a href="skills.html"><i data-feather="award"></i> <span>Skills</span></a>
-                        </li>
-                        <li>
-                            <a href="verify-identity.html"><i data-feather="user-check"></i> <span>Verify Identity</span></a>
-                        </li>
-                        <li>
-                            <a href="settings.html"><i data-feather="settings"></i> <span>Settings</span></a>
-                        </li>
-                        <li class="menu-title"><span>UI Interface</span></li>
-                        <li>
-                            <a href="components.html"><i data-feather="pocket"></i> <span>Components</span></a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i data-feather="file-minus"></i> <span> Forms</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="form-basic-inputs.html">Basic Inputs</a></li>
-                                <li><a href="form-input-groups.html">Input Groups</a></li>
-                                <li><a href="form-horizontal.html">Horizontal Form</a></li>
-                                <li><a href="form-vertical.html">Vertical Form</a></li>
-                                <li><a href="form-mask.html">Form Mask</a></li>
-                                <li><a href="form-validation.html">Form Validation</a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i data-feather="align-justify"></i> <span> Tables</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="tables-basic.html">Basic Tables</a></li>
-                                <li><a href="data-tables.html">Data Table</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
 
 
         <div class="page-wrapper">
@@ -408,27 +336,25 @@
                         </div>
                         <div class="form-group">
                             <label>Budget</label>
-                            <input type="text" class="form-control" name="budget" id="budget">
+                            <input type="number" class="form-control" name="budget" id="budget">
                         </div>
 
                         <div class="form-group">
-                            <label>Progress</label>
 
-                                <input
-                                    id="progress"
-                                    name="progress"
-                                    type="range"
-                                    min="0"
-                                    max="100"
-                                    value="5"
-                                    class="form-control "
-                                    style="border: 1px solid #ced4da; padding: 0;"
+                            <label for="progressValue">Progress:</label>
+
+
+                            <div class="form-control"> <!-- Replace "form-group" with the appropriate CSS class for your styling -->
+
+                                <input type="range" name="progress" id="progress" min="0" max="100" step="1" value="50"
+                                       style="width: 100%; margin-top: 5px; margin-bottom: 10px;"
+                                       oninput="updateProgressValue(this.value)"
                                 >
-                            <span id="progressValue"></span> <!-- Add a span to display the percentage value -->
+                                {{--                            <span id="progressValueDisplay">50</span>--}}
+
+                            </div>
 
                         </div>
-
-
 
 
 
@@ -442,14 +368,14 @@
                         </div>
                         <div class="form-group">
                             <label>From Date</label>
-                            <div class="cal-icon">
-                                <input class="form-control datetimepicker" name="start_date" id="start_date" type="text" >
+                            <div class="">
+                                <input class="form-control " name="start_date" id="start_date" type="date" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label>To Date</label>
-                            <div class="cal-icon">
-                                <input class="form-control datetimepicker"  name="due_date" id="due_date" type="text" >
+                            <div class="">
+                                <input class="form-control "  name="due_date" id="due_date" type="date" >
                             </div>
                         </div>
                         <div class="mt-4">
@@ -485,25 +411,21 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Progress</label>
 
-                            <input
-                                id="progress"
-                                name="progress"
-                                type="range"
-                                min="0"
-                                max="100"
-                                value="5"
-                                class="form-control "
-                                style="border: 1px solid #ced4da; padding: 0;"
+                            <label for="progressValue">Progress:</label>
+
+
+                        <div class="form-control"> <!-- Replace "form-group" with the appropriate CSS class for your styling -->
+
+                            <input type="range" id="progressControl" min="0" max="100" step="1" value="50"
+                                   style="width: 100%; margin-top: 5px; margin-bottom: 10px;"
+                                   oninput="updateProgressValue(this.value)"
                             >
-                            <span id="progressValue"></span> <!-- Add a span to display the percentage value -->
+{{--                            <span id="progressValueDisplay">50</span>--}}
 
                         </div>
 
-
-
-
+                        </div>
 
                         <div class="form-group">
                             <label>Technology</label>
@@ -515,17 +437,17 @@
                         </div>
                         <div class="form-group">
                             <label>From Date</label>
-                            <div class="cal-icon">
+                            <div class="">
                                 <input class="form-control " name="start_date" id="start_date" type="date" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label>To Date</label>
-                            <div class="cal-icon">
+                            <div class="">
                                 <input class="form-control "  name="due_date" id="due_date" type="date" >
                             </div>
                         </div>
-                        <input class="form-control datetimepicker"  name="end_date" id="end_date" type="hidden" value="2023-01-01" >
+                        <input class="form-control "  name="end_date" id="end_date" type="hidden" value="2023-01-01" >
 
                         <div class="mt-4">
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -537,6 +459,35 @@
     </div>
 
     {{-- end modal ajout --}}
+{{--    <div class="modal custom-modal fade" id="delete_category" role="dialog">--}}
+{{--        <div class="modal-dialog modal-dialog-centered">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-body">--}}
+{{--                    <form action="{{url('deleteProjet')}}" method="post">--}}
+{{--                        @csrf--}}
+{{--                        @method('DELETE')--}}
+{{--                    <div class="form-header">--}}
+{{--                        <h3>Delete</h3>--}}
+{{--                        <p>Are you sure want to delete?</p>--}}
+{{--                    </div>--}}
+{{--                        <input type="hidden"  id="delete_id" name="delete_id">--}}
+
+{{--                        <div class="modal-btn delete-action">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-6">--}}
+{{--                                <button type="submit" class="btn btn-primary continue-btn">Delete</button>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-6">--}}
+{{--                                <button data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    </form>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <div class="modal custom-modal fade" id="delete_category" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -544,29 +495,28 @@
                     <form action="{{url('deleteProjet')}}" method="post">
                         @csrf
                         @method('DELETE')
-                    <div class="form-header">
-                        <h3>Delete</h3>
-                        <p>Are you sure want to delete?</p>
-                    </div>
-                        <input type="hidden"  id="delete_id" name="delete_id">
-
-                        <div class="modal-btn delete-action">
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary continue-btn">Delete</button>
-                            </div>
-                            <div class="col-6">
-                                <button data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</button>
-                            </div>
+                        <div class="form-header">
+                            <h3>Delete</h3>
+                            <p>Are you sure want to delete?</p>
                         </div>
-                    </div>
-                    </form>
+                        <input type="hidden" id="delete_id" name="delete_id">
+                        <div class="modal-btn delete-action">
 
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary continue-btn">Delete</button>
+                                </div>
+                                <div class="col-6">
+                                    <button data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
@@ -623,5 +573,10 @@
             progressValue.textContent = progressInput.value + "%";
         });
     </script>
+<script>
+    function updateProgressValue(value) {
+        document.getElementById('progressValueDisplay').textContent = value;
+    }
 
+</script>
 @endsection
