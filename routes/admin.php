@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GigController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,17 +16,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('Admin.Home');
-});
- 
+// Route::group(['middleware' => 'auth:admin'],function(){
+
+//     Route::get('/',[DashboardController::class, 'index']);
+
+     
+
+// });
+
+
+ Route::get('/',[DashboardController::class, 'index']);
+
+
+
+
+//  Route::group(['middleware' => 'guest:admin'], function () {
+   
+//      Route::get('/login',[AdminLoginController::class, 'getLogin']);
+//      Route::post('/login',[AdminLoginController::class, 'login'])->name('admin.login');
+
+//  });
+
+
+
 
 Route::get('/gigs',[GigController::class, 'index'])->name('admin.gigs');
 
 
 
-// Route::group(['middleware' => 'guest:admin'], function () {
-   
-//     Route::get('login',[AdminLoginController::class, 'getLogin']);
 
-// });
+
+

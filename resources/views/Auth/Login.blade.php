@@ -12,21 +12,25 @@
                             <h1>Welcome Back</h1>
                             <p class="account-subtitle">Don't miss your next opportunity. Sign in to stay updated on
                                 your professional world.</p>
-                            <form action="https://kofejob.dreamguystech.com/template/admin/index.html">
+                            <form method="POST" action="{{route('user.login')}}">
+                                @csrf
                                 <div class="form-group form-focus">
-                                    <input type="email" class="form-control floating">
+                                    <input type="email" class="form-control floating" id="email" name="email">
                                     <label class="focus-label">Email</label>
+                                    @error('email')
+                                    <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
                                 </div>
                                 <div class="form-group form-focus">
-                                    <input type="password" class="form-control floating">
+                                    <input type="password" class="form-control floating" id="password" name="password">
                                     <label class="focus-label">Password</label>
+                                    @error('password')
+                                    <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label class="custom_check">
-                                        <input type="checkbox" name="rem_password">
-                                        <span class="checkmark"></span> Remember password
-                                    </label>
-                                </div>
+    
+
+
                                 <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Login</button>
                                 <div class="login-or">
                                     <p>Or login with</p>
