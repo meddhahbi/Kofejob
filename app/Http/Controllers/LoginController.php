@@ -66,33 +66,32 @@ class LoginController extends Controller
 
 
 
-  public function logout (){
+  // public function logout (){
 
-      $user = User::where('remember_token', Session::get('remember_token'))->first();
+  //     $user = User::where('remember_token', Session::get('remember_token'))->first();
+
+  //     if ($user) {
+       
+  //       $user->update(['remember_token' => null]);
+
+       
+  //       return Redirect::route('login');
+  //   }
+
+  //   return Redirect::route('login');
+
+  //   }
+
+
+    public function logout(Request $request){
+
+      $user = User::where('email', $request->input('email'))->first();
 
       if ($user) {
-       
-        $user->update(['remember_token' => null]);
+          $user->update(['remember_token' => null]);
+      }
 
-       
-        return Redirect::route('login');
-    }
-
-    return Redirect::route('login');
-
-    }
-
-
-
-
-    //Incomplete methode
-
-    public function checkToken(){
-      $user = User::where('remember_token', Session::get('token'))->first();
-
-      $rememberToken = ($user && $user->remember_token) ? $user->remember_token : null;
-
-      return view('Front.Includes.navbar', ['rememberToken' => $rememberToken]);
+    return redirect()->route('Home');
 
     }
 
