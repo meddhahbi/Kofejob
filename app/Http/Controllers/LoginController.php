@@ -9,11 +9,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
 
+
+  // public function checkIdUser(){
+  //   dd($this->loggedInUserId);
+  // }
   
     public function showLogin(){
         return view('Auth.Login');
@@ -48,7 +53,9 @@ class LoginController extends Controller
           $token = Str::random(60);
           $user->update(['remember_token' => hash('sha256', $token)]);
 
+          Cache::put('loggedInUserId', $user->id, now()->addMinutes(60));
 
+         // dd($this->loggedInUserId);
 
           if ($user->isAdmin()) {
            
@@ -65,36 +72,25 @@ class LoginController extends Controller
 
 
 
+    public function logout()
+    {
+      $loggedInUserId = Cache::get('loggedInUserId');
+        $user = User::find($loggedInUserId);
+    
+        if ($user) {
+            if ($user->isRememberTokenNotNull()) {
+                 $user->logout();
+                 Cache::forget('loggedInUserId');
+            // dd($user);
+            }
+        }
+    
+         return redirect('/login');
 
-  // public function logout (){
-
-  //     $user = User::where('remember_token', Session::get('remember_token'))->first();
-
-  //     if ($user) {
-       
-  //       $user->update(['remember_token' => null]);
-
-       
-  //       return Redirect::route('login');
-  //   }
-
-  //   return Redirect::route('login');
-
-  //   }
-
-
-    public function logout(Request $request){
-
-      $user = User::where('email', $request->input('email'))->first();
-
-      if ($user) {
-          $user->update(['remember_token' => null]);
-      }
-
-    return redirect()->route('Home');
-
+      // dd($loggedInUserId);
     }
 
+   
 
 
 

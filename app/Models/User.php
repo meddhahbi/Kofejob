@@ -47,4 +47,14 @@ class User extends Authenticatable
     public function isAdmin() {
         return $this->role === 'admin'; 
     }
+
+    public function isRememberTokenNotNull()
+    {
+        return $this->remember_token !== null;
+    }
+
+    public function logout()
+    {
+        $this->update(['remember_token' => null]);
+    }
 }
