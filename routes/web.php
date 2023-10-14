@@ -34,13 +34,7 @@ Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');
 
 Route::get('edit/{id}',[GigController::class,'edit'])->name('Front.Gig.Edit');
 Route::post('update/{id}',[GigController::class,'update'])->name('Front.Gig.update');
-
-
 Route::get('delete/{id}',[GigController::class,'destroy'])->name('Front.Gig.delete');
-
-
-
-
 Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index');
 
 
@@ -58,6 +52,7 @@ Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gi
 
  
  Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+//  Route::get('/check', [LoginController::class, 'checkIdUser'])->name('check');
 
 
 
