@@ -31,7 +31,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        
+
     ];
 
     /**
@@ -44,8 +44,12 @@ class User extends Authenticatable
     ];
 
 
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
+    }
     public function isAdmin() {
-        return $this->role === 'admin'; 
+        return $this->role === 'admin';
     }
 
     public function isRememberTokenNotNull()
