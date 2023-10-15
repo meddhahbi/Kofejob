@@ -14,8 +14,8 @@
                         </ul>
                     </div>
                     <div class="col-auto">
-                        <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
-                            <i class="fas fa-filter"></i>
+                        <a class="btn filter-btn" href="{{ route('admin.skills.index') }}" id="filter_search">
+                            <i class="fas fa-arrow-left"></i>
                         </a>
                     </div>
                 </div>
@@ -76,7 +76,12 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name:</label>
-                                    <input type="text" name="name" id="name" class="form-control" autocomplete="off" required>
+                                    <input type="text" name="name" class="form-control" id="name" autocomplete="off" placeholder="create a new skill">
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Create</button>
                             </form>
@@ -88,7 +93,6 @@
             </div>
         </div>
 
-    </div>
     </div>
 
 

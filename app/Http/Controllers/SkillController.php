@@ -22,14 +22,19 @@ class SkillController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:skills|max:255',
+        // Validate skill data
+        $validatedData = $request->validate([
+            'name' => 'required|string|unique:skills|min:3|max:50',
         ]);
 
-        Skill::create($request->all());
-
-        return redirect()->route('admin.skills.index')
-            ->with('success', 'Skill created successfully');
+        // Attempt to create the skill
+        try {
+            $skill = Skill::create($validatedData);
+            return redirect()->route('admin.skills.index')->with('success', 'Skill created successfully.');
+        } catch (\Exception $e) {
+            // Handle any exceptions (e.g., database errors)
+            return back()->withInput()->withErrors(['error' => 'Skill creation failed.']);
+        }
     }
 
     /**
@@ -51,7 +56,7 @@ class SkillController extends Controller
     public function update(Request $request, Skill $skill)
     {
         $this->validate($request, [
-            'name' => 'required|unique:skills,name,'.$skill->id.'|max:255',
+            'name' => 'required|unique:skills,name,'.$skill->id.'|max:50|min:3',
         ]);
 
         $skill->update($request->all());
@@ -64,7 +69,8 @@ class SkillController extends Controller
     {
         $skill->delete();
 
-        return redirect()->route('admin.skills.index')
-            ->with('success', 'Skill deleted successfully');
+//        return redirect()->route('admin.skills.index')
+//            ->with('success', 'Skill deleted successfully');
+        $this->index();
     }
 }

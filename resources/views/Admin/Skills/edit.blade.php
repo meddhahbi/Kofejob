@@ -14,8 +14,8 @@
                         </ul>
                     </div>
                     <div class="col-auto">
-                        <a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
-                            <i class="fas fa-filter"></i>
+                        <a class="btn filter-btn" href="{{ route('admin.skills.index') }}" id="filter_search">
+                            <i class="fas fa-arrow-left"></i>
                         </a>
                     </div>
                 </div>
@@ -78,6 +78,9 @@
                                 <div class="form-group">
                                     <label for="name">Name:</label>
                                     <input type="text" name="name" id="name" class="form-control" autocomplete="off" value="{{ $skill->name }}" required>
+                                    @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>

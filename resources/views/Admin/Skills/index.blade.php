@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="page-wrapper">
+        <!-- Include SweetAlert2 CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <!-- Include DataTables CSS -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.10/css/dataTables.bootstrap4.min.css">
         <div class="content container-fluid">
 
             <div class="page-header">
@@ -91,13 +95,20 @@
                                                     <td>{{ $skill->name }}</td>
                                                     <td>
                                                         <a href="{{ route('admin.skills.edit', $skill->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                        <form action="{{ route('admin.skills.destroy', $skill->id) }}" method="POST" style="display: inline;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                                        </form>
+{{--                                                        <form action="{{ route('admin.skills.destroy', $skill->id) }}" method="POST" style="display: inline;">--}}
+{{--                                                            @csrf--}}
+{{--                                                            @method('DELETE')--}}
+{{--                                                            <button type="submit" class="btn btn-sm btn-danger delete-skill" data-skill-id="{{ $skill->id }}">Delete</button>--}}
+{{--                                                        </form>--}}
+                                                        <button type="button" class="btn btn-sm btn-danger delete-skill" data-skill-id="{{ $skill->id }}">
+                                                            Delete
+                                                        </button>
                                                     </td>
                                                 </tr>
+                                                <form id="delete-form-{{ $skill->id }}" action="{{ route('admin.skills.destroy', $skill->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             @endforeach
                                         @endisset
                                     </tbody>
@@ -111,7 +122,6 @@
             </div>
         </div>
 
-    </div>
     </div>
 
 
@@ -137,5 +147,55 @@
                 </div>
             </div>
         </div>
+        <!-- Include SweetAlert2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+        <script>
+            document.querySelectorAll('.delete-skill').forEach(button => {
+                button.addEventListener('click', function () {
+                    const skillId = this.getAttribute('data-skill-id');
+
+                    Swal.fire({
+                        title: 'Confirm Deletion',
+                        text: `Are you sure you want to delete this skill?`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Delete',
+                        cancelButtonText: 'Cancel',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Send an AJAX request to delete the skill
+                            axios.delete(`{{ route('admin.skills.destroy', '') }}/${skillId}`)
+                                .then((response) => {
+                                    console.log(response.status)
+                                    if (response.status === 204|| response.status === 200) {
+                                        // Successful deletion, you can update the UI as needed
+                                        Swal.fire({
+                                            title: 'Deleted!',
+                                            text: 'The skill has been deleted.',
+                                            icon: 'success',
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                // Modify the URL or redirect to a different page
+                                                window.location.href = '{{ route('admin.skills.index') }}';
+                                            }
+                                        });
+
+                                    } else {
+                                        Swal.fire('Error', 'Failed to delete the skill.', 'error');
+                                    }
+                                })
+                                .catch((error) => {
+                                    Swal.fire('Error', 'An error occurred while deleting the skill.', 'error');
+                                });
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+
     </div>
 @endsection
