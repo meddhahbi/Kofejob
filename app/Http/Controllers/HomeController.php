@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gig;
+use App\Models\gig_rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -13,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+      //  $this->middleware('auth');
     }
 
     /**
@@ -25,4 +28,38 @@ class HomeController extends Controller
     {
         return view('Front.Home');
     }
+
+
+
+    public function projects(){
+      $gigs = Gig::select('id','title','description','orders','price', 'created_at')->get();
+
+       return view('Front.Projects', compact('gigs'));
+    }
+
+
+
+
+    
+    public function singleProject($id){
+
+
+      
+      $gig = Gig::find($id);
+
+      $userRating = gig_rating::where('user_id', Cache::get('loggedInUserId'))
+        ->where('gig_id', $id)
+        ->first();
+
+
+      if (!$gig) {
+          return abort(404);
+      }
+  
+      return view('Front.GigDetails', compact('gig','userRating'));
+    }
+
+
+
+
 }

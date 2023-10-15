@@ -9,9 +9,22 @@ use Illuminate\Support\Facades\Validator;
 class GigController extends Controller
 {
     public function index(){
-        $gigs = Gig::select();
+      $gigs = Gig::select('id','title','description','orders','price', 'created_at')->get();
         return view('Admin.Gigs.index', compact('gigs'));
     }
+
+
+
+    public function indexForFreelancer(){
+
+      $gigs = Gig::select('id','title','description','orders','price', 'created_at')->get();
+
+     // dd($gigs);
+      return view('Front.Gig.index', compact('gigs'));
+
+    }
+
+
 
 
     public function create(){
@@ -67,5 +80,72 @@ class GigController extends Controller
        
       ];
     }
+
+
+    public function edit($id){
+
+      $gig = Gig::find($id);
+
+      if(!$gig){
+        return redirect()->route('Front.Gig.index')->with(['errors'=>'Gig not found']);
+      }
+
+      return view('Front.Gig.Edit', compact('gig'));
+
+
+    }
+
+
+    public function update($id,Request $request){
+
+
+      
+      $gig = Gig::find($id);
+
+      $messages=$this->getMessages();
+
+      $validator = Validator::make($request->all(),
+        [
+          'title'=>'required|max:50',
+          'price'=>'required|numeric',
+          'description'=>'required'
+        ],
+        $messages
+        );
+
+
+
+      if(!$gig){
+        return redirect()->route('Front.Gig.Edit',$id)->with(['errors'=>'Gig not found']);
+      }elseif($validator->fails()){
+
+        return redirect()->back()->withErrors($validator)->withInputs($request->all());
+      }else{
+      $gig->update($request->except('_token'));
+
+      return redirect()->route('Front.Gig.index')->with(['sucess'=>'Gig updated']);
+     }
+
+    }
+
+
+
+    public function destroy($id){
+
+      $gig = Gig::find($id);
+
+      if(!$gig){
+        return redirect()->route('Front.Gig.index')->with(['errors'=>'Gig not found']);
+      }
+
+
+      $gig->delete();
+      return redirect()->route('Front.Gig.index')->with(['sucess'=>'Gig deleted']);
+
+
+    }
+
+
+
 
 }

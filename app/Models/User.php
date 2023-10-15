@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'remember_token',
     ];
 
     /**
@@ -30,7 +31,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+
     ];
 
     /**
@@ -42,8 +43,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function skills()
     {
         return $this->belongsToMany(Skill::class);
+    }
+    public function isAdmin() {
+        return $this->role === 'admin';
+    }
+
+    public function isRememberTokenNotNull()
+    {
+        return $this->remember_token !== null;
+    }
+
+    public function logout()
+    {
+        $this->update(['remember_token' => null]);
     }
 }
