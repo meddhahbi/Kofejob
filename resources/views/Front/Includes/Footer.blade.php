@@ -75,7 +75,7 @@
     <div class="col-md-6 col-lg-6 ">
     <div class="footer-bottom-logo">
     <a href="index.html" class="menu-logo">
-    <img src="Assets/img/logo.png" class="img-fluid" alt="Logo">
+    <img src="{{ asset('Assets/img/logo.png') }}" class="img-fluid" alt="Logo">
     </a>
     </div>
     </div>

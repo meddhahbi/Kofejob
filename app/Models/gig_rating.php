@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class gig_rating extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'gig_id',
+        'star_rating',
+        'message',
+    ];
 }

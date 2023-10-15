@@ -319,7 +319,7 @@
     <div class="row">
     <div class="col-md-12 text-center">
     <div class="see-all aos" data-aos="fade-up">
-    <a href="project.html" class="btn all-btn">View More Projects</a>
+    <a href="{{route('projects')}}" class="btn all-btn">View More Projects</a>
     </div>
     </div>
     </div>
