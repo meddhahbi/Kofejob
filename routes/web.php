@@ -3,6 +3,7 @@
 use App\Http\Controllers\GigController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RaitingController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,7 @@ Route::get('/dash', function () {
 
 
 Route::get('/', [HomeController::class, 'index'])->name('Home');
+Route::get('/allgigs', [HomeController::class, 'projects'])->name('projects');
 
 
 Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add');
@@ -36,7 +38,12 @@ Route::get('edit/{id}',[GigController::class,'edit'])->name('Front.Gig.Edit');
 Route::post('update/{id}',[GigController::class,'update'])->name('Front.Gig.update');
 Route::get('delete/{id}',[GigController::class,'destroy'])->name('Front.Gig.delete');
 Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index');
+Route::get('/gigs/{id}', [HomeController::class, 'singleProject'])->name('gig.show');
 
+
+
+
+Route::post('/add-rating', [RaitingController::class, 'addRating'])->name('Raiting.store');
 
 
 
