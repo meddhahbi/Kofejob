@@ -58,25 +58,15 @@
                                     </div>
                                     <div class="content-divider"></div>
                                     <div class="projects-action text-center">
-                                        <a href="view-project-detail.html" class="projects-btn">View Details </a>
-                                        <a href="#" class="hired-detail">Hired on 19 JUN 2021</a>
+                                        <a href="{{route('Front.Gig.Edit',$gig->id)}}" class="projects-btn">Update </a>
+                                        <a href="{{route('Front.Gig.delete',$gig->id)}}" class="projects-btn">Delete </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 d-flex flex-wrap">
-                    <div class="projects-card flex-fill">
-                        <div class="card-body p-2">
-                            <div class="prj-proposal-count text-center hired">
-                                <h3>Hired</h3>
-                                <img src="Assets/img/developer/developer-01.jpg" alt class="img-fluid">
-                                <p class="mb-0">Hannah Finn</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
             </div>
         </div>
 

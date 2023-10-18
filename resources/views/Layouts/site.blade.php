@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset('Assets/plugins/select2/css/select2.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('Assets/css/style.css') }}">
+    @stack('styles')
+    
 
 </head>
 
@@ -54,6 +56,7 @@
         <span class="ti-angle-up"><img src="Assets/img/icon/top-icon.svg" class="img-fluid" alt></span>
     </button>
 
+    
     <script src="Assets/js/jquery-3.6.1.min.js"></script>
 
     <script src="Assets/js/bootstrap.bundle.min.js"></script>
