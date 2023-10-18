@@ -9,6 +9,7 @@ use App\Http\Controllers\RaitingController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BlogController;
 
 
 /*
@@ -104,3 +105,13 @@ Route::post('/projet/add',[\App\Http\Controllers\ProjetController::class,'store'
 Route::get('/projetFront',[\App\Http\Controllers\ProjetController::class,'indexFront'])->name('projet.indexFront');;
 Route::get('/projetFront2',[\App\Http\Controllers\ProjetController::class,'indexFront2'])->name('projet.indexFront2');;
 
+///BLOOOG
+Route::get('/blogs', [BlogController::class, 'index'])->name('Index');
+Route::get('/blogs/create', [BlogController::class, 'create'])->name('CreateBlog');
+Route::post('/blogs/store', [BlogController::class, 'store'])->name('StoreBlog');
+Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('EditBlog');
+Route::post('/blogs/update/{id}', [BlogController::class, 'update'])->name('UpdateBlog');
+Route::delete('/blogs/destroy/{id}', [BlogController::class, 'destroy'])->name('DestroyBlog');
+Route::delete('/blogs/destroyAdmin/{id}', [BlogController::class, 'destroyAdmin'])->name('DestroyBlogAdmin');
+Route::get('/blogsAdmin', [BlogController::class, 'indexAdmin'])->name('IndexAdmin');
+Route::get('/blogDetails/{id}', [BlogController::class, 'show'])->name('DetailsBlog');
