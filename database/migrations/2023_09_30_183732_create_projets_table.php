@@ -20,11 +20,16 @@ return new class extends Migration
             $table->string('technology');
             $table->string('company');
             $table->date('start_date');
-            $table->date('end_date');
             $table->date('due_date');
             $table->float('budget', 8, 2); // Total digits: 8, Decimal places: 2
             $table->integer('progress')->unsigned(); // Progress as an integer (0 to 100)
             $table->timestamps();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
         });
     }
 

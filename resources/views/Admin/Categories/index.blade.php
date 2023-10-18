@@ -218,8 +218,7 @@
                                             <th>Category Name</th>
                                             <th>Slug</th>
                                             <th>Description</th>
-                                            <th>Image</th>
-                                            <th>Status</th>
+
                                             <th class="text-end">Actions</th>
                                         </tr>
                                         </thead>
@@ -233,8 +232,7 @@
                                             <td>{{$item->name}}</td>
                                             <td>{{$item->slug}}</td>
                                             <td>{{$item->description}}</td>
-                                            <td></td>
-                                            <td></td>
+
 
                                             <td class="text-end">
                                                 <a  class="btn btn-sm btn-secondary edit-category me-2" data-id="{{ $item->id }}" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a>
@@ -266,24 +264,27 @@
 
                 <div class="modal-body">
 
-                    <form action="{{url('/category/add')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{url('/category/add')}}" method="post" id="add-category-form" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label>Category Name</label>
                             <input type="text" name="name" class="form-control" placeholder="Enter Category Name">
+                            <span id="name-error" class="text-danger validation-error"></span>
+
                         </div>
                         <div class="form-group">
                             <label>Slug</label>
                             <input type="text" name="slug" class="form-control" placeholder="Enter Category Name">
+                            <span id="slug-error" class="text-danger validation-error"></span>
+
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea name="description" class="form-control" rows="3"></textarea>
+                            <textarea name="description" class="form-control" rows="3" placeholder="Enter the description"></textarea>
+                            <span id="description-error" class="text-danger validation-error"></span>
+
                         </div>
-                        <div class="form-group">
-                            <label>Image</label>
-                            <input name="image" type="file" class="form-control">
-                        </div>
+
 
                         <div class="mt-4">
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -401,6 +402,44 @@
         </div>
     </div>
     {{-- end delete modal --}}
+
+    <script>
+        $(document).ready(function () {
+            $('#add-category-form').on('submit', function (e) {
+                e.preventDefault(); // Prevent the default form submission
+                clearValidationErrors();
+
+                // Serialize the form data
+                var formData = $(this).serialize();
+
+                // Make an Ajax request to the controller for validation
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ url("/category/add") }}',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            // If validation is successful, you can close the modal and do any further processing
+                            $('#add-category').modal('hide'); // Assuming the modal ID is 'add-proj'
+                            // Perform any additional actions you need
+                            window.location.href = '{{ url("/category") }}';
+
+                        } else {
+                            console.log('Validation Errors:');
+                            console.log(response.errors);
+                            // If there are validation errors, display the errors under their inputs
+                            $.each(response.errors, function(field, error) {
+
+                                $('#' + field + '-error').text(error); // Display error under the appropriate field
+                            });                    }
+                    }
+                });
+            });
+        });
+        function clearValidationErrors() {
+            $('.validation-error').text(''); // Assuming you have a common class for all error message elements
+        }
+    </script>
 
 @endsection
 

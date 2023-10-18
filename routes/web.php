@@ -22,6 +22,8 @@ Route::get('/dash', function () {
 
 
 
+
+
 // Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('Home');
@@ -33,19 +35,19 @@ Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');
 Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index');
 
 ////////////Category
-Route::get('/category',[\App\Http\Controllers\Admin\CategoryController::class,'index'])->name('category.index');;
-Route::post('/category/add',[\App\Http\Controllers\Admin\CategoryController::class,'store']);
-Route::get('edit-category/{id}',[\App\Http\Controllers\Admin\CategoryController::class,'edit']);
-Route::put('updateCategory',[\App\Http\Controllers\Admin\CategoryController::class,'update']);
-Route::delete('deleteCategory',[\App\Http\Controllers\Admin\CategoryController::class,'destroy']);
+Route::get('/category',[\App\Http\Controllers\CategoryController::class,'index'])->name('category.index');;
+Route::post('/category/add',[\App\Http\Controllers\CategoryController::class,'store']);
+Route::get('edit-category/{id}',[\App\Http\Controllers\CategoryController::class,'edit']);
+Route::put('updateCategory',[\App\Http\Controllers\CategoryController::class,'update']);
+Route::delete('deleteCategory',[\App\Http\Controllers\CategoryController::class,'destroy']);
 
 
 /////Projets///////////////
-Route::get('/projet',[\App\Http\Controllers\Admin\ProjetController::class,'index'])->name('projet.index');;
-Route::get('edit-projet/{id}',[\App\Http\Controllers\Admin\ProjetController::class,'edit']);
-Route::delete('deleteProjet',[\App\Http\Controllers\Admin\ProjetController::class,'destroy']);
-Route::put('updateProjet',[\App\Http\Controllers\Admin\ProjetController::class,'update']);
-Route::post('/projet/add',[\App\Http\Controllers\Admin\ProjetController::class,'store']);
-Route::get('/projetFront',[\App\Http\Controllers\Admin\ProjetController::class,'indexFront'])->name('projet.indexFront');;
-Route::get('/projetFront2',[\App\Http\Controllers\Admin\ProjetController::class,'indexFront2'])->name('projet.indexFront2');;
+Route::get('/projet',[\App\Http\Controllers\ProjetController::class,'index'])->name('projet.index');
+Route::get('edit-projet/{id}',[\App\Http\Controllers\ProjetController::class,'edit']);
+Route::delete('deleteProjet',[\App\Http\Controllers\ProjetController::class,'destroy']);
+Route::put('updateProjet',[\App\Http\Controllers\ProjetController::class,'update']);
+Route::post('/projet/add',[\App\Http\Controllers\ProjetController::class,'store']);
+Route::get('/projetFront',[\App\Http\Controllers\ProjetController::class,'indexFront'])->name('projet.indexFront');;
+Route::get('/projetFront2',[\App\Http\Controllers\ProjetController::class,'indexFront2'])->name('projet.indexFront2');;
 

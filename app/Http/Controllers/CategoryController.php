@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use function redirect;
+use function response;
+use function view;
 
 class CategoryController extends Controller
 {
@@ -40,9 +43,26 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-        $input=$request->all();
-        Category::create($input);
-        return redirect('category')->with('flash_message', 'Category Addedd!');
+        $validator = Validator::make($request->all(), [
+            'description' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+
+
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()]);
+        } else {
+            // If validation is successful, create the Projet and return a success response
+            Category::create($request->all());
+            if ($request->ajax()) {
+                // If it's an AJAX request, return a JSON success response
+                return response()->json(['success' => true]);
+            } else {
+                // If it's not an AJAX request, redirect to the 'projet' route with a success message
+                return redirect('category')->with('status', 'Category Added!');
+            }        }
 
     }
 

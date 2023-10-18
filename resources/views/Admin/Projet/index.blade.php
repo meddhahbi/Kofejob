@@ -1,10 +1,6 @@
 @extends('Layouts.admin')
-
 @section('content')
-
-
-
-    <div class="main-wrapper">
+<div class="main-wrapper">
 
         <div class="header">
 
@@ -136,15 +132,8 @@
                         <a class="dropdown-item" href="login.html"><i data-feather="log-out" class="me-1"></i> Logout</a>
                     </div>
                 </li>
-
             </ul>
-
         </div>
-
-
-
-
-
         <div class="page-wrapper">
             <div class="content container-fluid">
 
@@ -204,7 +193,9 @@
                         </form>
                     </div>
                 </div>
-
+                @if(session('status'))
+                    <div class="alert alert-success">{{session('status')}}</div>
+                @endif
                 <div class="card bg-white projects-card">
                     <div class="card-body pt-0">
                         <div class="card-header">
@@ -239,6 +230,7 @@
                                             <th>Budget</th>
                                             <th>Progress</th>
                                             <th>Technology</th>
+                                            <th>Category</th>
                                             <th>Company</th>
                                             <th>Start date</th>
                                             <th>Due date</th>
@@ -270,6 +262,9 @@
                                             </td>
                                             <td>
                                                 {{$projet->technology}}
+                                            </td>
+                                            <td>
+                                                {{$projet->category->name}}
                                             </td>
                                             <td>{{$projet->company}}</td>
                                             <td>{{$projet->start_date}}</td>
@@ -363,6 +358,17 @@
                             <input type="text" name="technology" id="technology" class="form-control" >
                         </div>
                         <div class="form-group">
+                            <label for="category_id">Category:</label>
+                            <select class="form-control" name="category_id" id="category_id">
+                                @foreach ($categories as $category)
+{{--                                    <option value="{{ $category->id }}">{{ $category->name }}</option>--}}
+                                    <option value="{{ $category->id }}" {{ $projet->category_id === $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label>Company</label>
                             <input type="text" name="company" id="company" class="form-control" >
                         </div>
@@ -388,6 +394,7 @@
     </div>
 
     {{--debut modal ajout--}}
+
     <div class="modal fade custom-modal" id="add-proj">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -395,8 +402,9 @@
                     <h4 class="modal-title">Projects</h4>
                     <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
                 </div>
+
                 <div class="modal-body">
-                    <form action="{{url('/projet/add')}}" method="post">
+                    <form action="{{url('/projet/add')}}" method="post" id="add-proj-form">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="proj_id" id="proj_id" >
@@ -404,10 +412,14 @@
                         <div class="form-group">
                             <label>Title</label>
                             <input type="text" name="title" id="title" class="form-control" placeholder="Enter a title">
+                            <span id="title-error" class="text-danger validation-error "></span>
+
                         </div>
                         <div class="form-group">
                             <label>Budget</label>
                             <input type="number" class="form-control" name="budget" id="budget" placeholder="Budget">
+                            <span id="budget-error" class="text-danger validation-error"></span>
+
                         </div>
 
                         <div class="form-group">
@@ -417,7 +429,7 @@
 
                         <div class="form-control"> <!-- Replace "form-group" with the appropriate CSS class for your styling -->
 
-                            <input type="range" id="progressControl" min="0" max="100" step="1" value="50"
+                            <input type="range" id="progress" name="progress" min="0" max="100" step="1" value="50"
                                    style="width: 100%; margin-top: 5px; margin-bottom: 10px;"
                                    oninput="updateProgressValue(this.value)"
                             >
@@ -430,21 +442,41 @@
                         <div class="form-group">
                             <label>Technology</label>
                             <input type="text" name="technology" id="technology" class="form-control" placeholder="Enter a technology">
+                            <span id="technology-error" class="text-danger validation-error"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label >Category:</label>
+                            <select name="category_id" id="category_id" class="form-control">
+                                <option value="" disabled selected>Select a category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+
+                            </select>
+                            <span id="category_id-error" class="text-danger validation-error"></span>
+
                         </div>
                         <div class="form-group">
                             <label>Company</label>
                             <input type="text" name="company" id="company" class="form-control"placeholder="Enter a company">
+                            <span id="company-error" class="text-danger"></span>
+
                         </div>
                         <div class="form-group">
                             <label>From Date</label>
                             <div class="">
                                 <input class="form-control " name="start_date" id="start_date" type="date" >
+                                <span id="start_date-error" class="text-danger validation-error"></span>
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label>To Date</label>
                             <div class="">
                                 <input class="form-control "  name="due_date" id="due_date" type="date" >
+                                <span id="due_date-error" class="text-danger validation-error"></span>
+
                             </div>
                         </div>
                         <input class="form-control "  name="end_date" id="end_date" type="hidden" value="2023-01-01" >
@@ -453,41 +485,13 @@
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
                         </div>
                     </form>
+                    <div id="error-messages" class="text-danger"></div>
+
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- end modal ajout --}}
-{{--    <div class="modal custom-modal fade" id="delete_category" role="dialog">--}}
-{{--        <div class="modal-dialog modal-dialog-centered">--}}
-{{--            <div class="modal-content">--}}
-{{--                <div class="modal-body">--}}
-{{--                    <form action="{{url('deleteProjet')}}" method="post">--}}
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-{{--                    <div class="form-header">--}}
-{{--                        <h3>Delete</h3>--}}
-{{--                        <p>Are you sure want to delete?</p>--}}
-{{--                    </div>--}}
-{{--                        <input type="hidden"  id="delete_id" name="delete_id">--}}
-
-{{--                        <div class="modal-btn delete-action">--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-6">--}}
-{{--                                <button type="submit" class="btn btn-primary continue-btn">Delete</button>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-6">--}}
-{{--                                <button data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    </form>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
     <div class="modal custom-modal fade" id="delete_category" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -504,10 +508,10 @@
 
                             <div class="row">
                                 <div class="col-6">
-                                    <button type="submit" class="btn btn-primary continue-btn">Delete</button>
+                                    <button type="submit" style="width:200px" class="btn btn-primary continue-btn">Delete</button>
                                 </div>
                                 <div class="col-6">
-                                    <button data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</button>
+                                    <button data-bs-dismiss="modal" style="width:230px" class="btn btn-primary cancel-btn">Cancel</button>
                                 </div>
                             </div>
 
@@ -524,11 +528,8 @@
             $('.delete-projet').on('click', function () {
                 var cat_id = $(this).data('id');
                 $('#delete_id').val(cat_id);
-
-
-            })
-
-            $('.edit-projet').on('click',function (){
+})
+          $('.edit-projet').on('click',function (){
                 var proj_id=$(this).data('id');
                  //alert(proj_id)
                 console.log(proj_id)
@@ -536,7 +537,8 @@
                     type:"GET",
                     url:"edit-projet/"+proj_id,
                     success:function (response){
-                        console.log(response.projet.budget);
+                       // var category_name= response.projet.category.name;
+                        console.log(response.projet);
                         $('#title').val(response.projet.title);
                         $('#technology').val(response.projet.technology);
                         $('#company').val(response.projet.company);
@@ -544,18 +546,18 @@
                         $('#progress').val(response.projet.progress);
                         $('#start_date').val(response.projet.start_date);
                         $('#due_date').val(response.projet.due_date);
+                       // $('#category_id').val(response.projet.category.name);
+                        var categoryToSelect = response.projet.category.name; // Replace this with the category name you want to select
 
-                //
-                //
-                //
+// Find the option with a value that matches the category name and set it as selected
+                        $('#category_id option').filter(function() {
+                            return $(this).text() === categoryToSelect;
+                        }).prop('selected', true);
+
                         $('#proj_id').val(response.projet.id);
-                //
-                //
+
                     }
                 }))
-
-
-
             });
         });
 
@@ -577,6 +579,45 @@
     function updateProgressValue(value) {
         document.getElementById('progressValueDisplay').textContent = value;
     }
-
 </script>
+
+<script>
+    $(document).ready(function () {
+        $('#add-proj-form').on('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+            clearValidationErrors();
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+
+            // Make an Ajax request to the controller for validation
+            $.ajax({
+                type: 'POST',
+                url: '{{ url("/projet/add") }}',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        // If validation is successful, you can close the modal and do any further processing
+                        $('#add-proj').modal('hide'); // Assuming the modal ID is 'add-proj'
+                        // Perform any additional actions you need
+                        window.location.href = '{{ url("/projet") }}';
+
+                    } else {
+                        console.log('Validation Errors:');
+                        console.log(response.errors);
+                        // If there are validation errors, display the errors under their inputs
+                        $.each(response.errors, function(field, error) {
+
+                            $('#' + field + '-error').text(error); // Display error under the appropriate field
+                        });                    }
+                }
+            });
+        });
+    });
+    function clearValidationErrors() {
+        $('.validation-error').text(''); // Assuming you have a common class for all error message elements
+    }
+</script>
+
+
 @endsection

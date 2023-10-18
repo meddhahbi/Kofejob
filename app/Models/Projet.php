@@ -17,8 +17,14 @@ class Projet extends Model
         'technology',
         'company',
         'start_date',
-        'end_date',
-        'due_date'
+        'due_date',
+        'category_id'
+
 
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }

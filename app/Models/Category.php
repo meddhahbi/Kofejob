@@ -13,7 +13,10 @@ class Category extends Model
         'name',
         'slug',
         'description',
-        'image',
-        'status',
+
     ];
+    public function projects()
+    {
+        return $this->hasMany(Projet::class);
+    }
 }
