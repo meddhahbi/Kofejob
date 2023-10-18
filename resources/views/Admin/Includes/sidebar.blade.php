@@ -16,8 +16,7 @@
                     <a href="{{route('projet.index')}}"><i data-feather="database"></i> <span>Projects</span></a>
                 </li>
                 <li>
-                    <a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
-                </li>
+                <a href="{{route('IndexAdmin')}}"><i data-feather="database"></i> <span>Blogs</span></a>              </li>
                 <li>
                     <a href="deposit.html"><i data-feather="user-check"></i> <span>Deposit</span></a>
                 </li>
