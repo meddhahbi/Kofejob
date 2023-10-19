@@ -118,7 +118,6 @@ Route::get('/blogsAdmin', [BlogController::class, 'indexAdmin'])->name('IndexAdm
 Route::get('/blogDetails/{id}', [BlogController::class, 'show'])->name('DetailsBlog');
 
 //COMMENT
-///BLOOOG
 Route::get('/comments', [CommentController::class, 'index'])->name('Index');
 Route::get('/comments/create', [CommentController::class, 'create'])->name('CreateComment');
 Route::post('/comments/store', [CommentController::class, 'store'])->name('StoreComment');
