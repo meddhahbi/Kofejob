@@ -9,6 +9,8 @@ use App\Http\Controllers\RaitingController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 
 
 /*
@@ -95,4 +97,41 @@ Route::post('/add-rating', [RaitingController::class, 'addRating'])->name('Raiti
 
 
 
+////////////Category
+Route::get('/category',[\App\Http\Controllers\CategoryController::class,'index'])->name('category.index');;
+Route::post('/category/add',[\App\Http\Controllers\CategoryController::class,'store']);
+Route::get('edit-category/{id}',[\App\Http\Controllers\CategoryController::class,'edit']);
+Route::put('updateCategory',[\App\Http\Controllers\CategoryController::class,'update']);
+Route::delete('deleteCategory',[\App\Http\Controllers\CategoryController::class,'destroy']);
 
+
+/////Projets///////////////
+Route::get('/projet',[\App\Http\Controllers\ProjetController::class,'index'])->name('projet.index');
+Route::get('edit-projet/{id}',[\App\Http\Controllers\ProjetController::class,'edit']);
+Route::delete('deleteProjet',[\App\Http\Controllers\ProjetController::class,'destroy']);
+Route::put('updateProjet',[\App\Http\Controllers\ProjetController::class,'update']);
+Route::post('/projet/add',[\App\Http\Controllers\ProjetController::class,'store']);
+Route::get('/projetFront',[\App\Http\Controllers\ProjetController::class,'indexFront'])->name('projet.indexFront');;
+Route::get('/projetFront2',[\App\Http\Controllers\ProjetController::class,'indexFront2'])->name('projet.indexFront2');;
+
+///BLOOOG
+Route::get('/blogs', [BlogController::class, 'index'])->name('Index');
+Route::get('/blogs/create', [BlogController::class, 'create'])->name('CreateBlog');
+Route::post('/blogs/store', [BlogController::class, 'store'])->name('StoreBlog');
+Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('EditBlog');
+Route::post('/blogs/update/{id}', [BlogController::class, 'update'])->name('UpdateBlog');
+Route::delete('/blogs/destroy/{id}', [BlogController::class, 'destroy'])->name('DestroyBlog');
+Route::delete('/blogs/destroyAdmin/{id}', [BlogController::class, 'destroyAdmin'])->name('DestroyBlogAdmin');
+Route::get('/blogsAdmin', [BlogController::class, 'indexAdmin'])->name('IndexAdmin');
+Route::get('/blogDetails/{id}', [BlogController::class, 'show'])->name('DetailsBlog');
+
+//COMMENT
+Route::get('/comments', [CommentController::class, 'index'])->name('IndexComment');
+Route::get('/comments/create', [CommentController::class, 'create'])->name('CreateComment');
+Route::post('/comments/store', [CommentController::class, 'store'])->name('StoreComment');
+Route::get('/comments/edit/{id}', [CommentController::class, 'edit'])->name('EditComment');
+Route::post('/comments/update/{id}', [CommentController::class, 'update'])->name('UpdateComment');
+Route::delete('/comments/destroy/{id}', [CommentController::class, 'destroy'])->name('DestroyComment');
+Route::delete('/comments/destroyAdmin/{id}', [CommentController::class, 'destroyAdmin'])->name('DestroyCommentAdmin');
+Route::get('/commentsAdmin', [CommentController::class, 'indexAdmin'])->name('IndexAdminComment');
+Route::get('/commentDetails/{id}', [CommentController::class, 'show'])->name('DetailsComment');
