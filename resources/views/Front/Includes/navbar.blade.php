@@ -62,8 +62,8 @@
                         <li class="has-submenu">
                             <a href="#">Projects</a>
                             <ul class="submenu">
-                                <li><a href="project.html">Projects</a></li>
-                                <li><a href="project-details.html">Project Details</a></li>
+                                <li><a href="{{ route('projet.indexFront') }}">Projects</a></li>
+                                <li><a href="{{ route('projet.indexFront2') }}">Project Details</a></li>
                             </ul>
                         </li>
                         <li><a href="freelancer-dashboard.html">Dashboard</a></li>
@@ -103,7 +103,7 @@
                 <li class="has-submenu">
                     <a href>Blog <i class="fas fa-chevron-down"></i></a>
                     <ul class="submenu">
-                        <li><a href="blog-list.html">Blog List</a></li>
+                    <li><a href="{{ route('Index')}}">Blog List</a></li>
                         <li><a href="blog-grid.html">Blog Grid</a></li>
                         <li><a href="blog-details.html">Blog Details</a></li>
                     </ul>
@@ -124,12 +124,14 @@
             @endphp
 
             @if ($userWithRememberToken)
-              
+
                 <li><a href="{{ route('Front.Gig.Add') }}" class="login-btn">Post a Gig</a></li>
+
                 <li><a href="{{ route('logout') }}" class="logout-btn"><i class="material-icons">power_settings_new</i>Logout</a></li>
                 
+
             @else
-               
+
                 <li><a href="{{ route('register') }}" class="reg-btn"><img src="{{ asset('Assets/img/icon/reg-icon.svg') }}"
                             class="me-1" alt="icon"> Register</a></li>
                 <li><a href="{{ route('login') }}" class="log-btn"><img src="{{ asset('Assets/img/icon/lock-icon.svg') }}"
