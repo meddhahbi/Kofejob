@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
 
+
 class CommentController extends Controller
 {
     /**
@@ -13,11 +14,10 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $comment = Comment::all();
-        return view('Front.comment.index', compact('comment'));
-    }
+   public function index($blogId)
+{
+ //
+}
 
     /**
      * Display a listing of the resource.
@@ -26,8 +26,7 @@ class CommentController extends Controller
      */
     public function indexAdmin()
     {
-        $comment = Comment::all();
-        return view('Front.comment.indexAdmin', compact('comment'));
+     //
     }
 
     /**
@@ -47,21 +46,24 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'comment' => 'required',
-            
-        ]);
-        
-        Comment::create([
-            'comment' => $request->comment,
-            'user' => $request->user,
-            
-        ]);
+{
+    $validatedData = $request->validate([
+        'comment' => 'required',
+        'user' => 'required',
+        'blogId' => 'required',
+    ]);
 
-        return redirect()->route('Index')->with('success','Comment has been created successfully.');
-    }
 
+    $comment = Comment::create([
+        'comment' => $validatedData['comment'],
+        'user' => $validatedData['user'],
+        'blog_id' => $validatedData['blogId'],
+    ]);
+
+   
+    return redirect()->route('DetailsBlog', ['id' => $comment->blog_id])
+        ->with('success', 'Comment has been created successfully.');
+}
     /**
      * Display the specified resource.
      *
@@ -70,8 +72,7 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $comment = Comment::findOrFail($id);
-        return view('Front.comment.details',compact('comment'));
+        //
     }
 
     /**
@@ -82,8 +83,7 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        $comment = Comment::findOrFail($id);
-        return view('Front.comment.edit',compact('comment'));
+       //
     }
 
     /**
@@ -95,25 +95,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'comment' => 'required',
-            
-        ]);
-    
-        // Retrieve the existing blog entry by its ID
-        $comment = Comment::findOrFail($id);
-    
-        
-    
-        // Update other fields
-        $comment->comment = $request->comment;
-        $comment->user = $request->user;
-       
-    
-        // Save the updated blog entry
-        $comment->save();
-    
-        return redirect()->route('Index')->with('success', 'Comment Has Been updated successfully');
+       //
     }
 
     /**
@@ -124,9 +106,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::findOrFail($id);
-        $comment->delete();
-        return redirect()->route('Index')->with('success','Comment has been deleted successfully');
+       //
     }
 
     /**
@@ -137,8 +117,6 @@ class CommentController extends Controller
      */
     public function destroyAdmin($id)
     {
-        $comment = Comment::findOrFail($id);
-        $comment->delete();
-        return redirect()->route('IndexAdmin')->with('success','Comment has been deleted successfully');
+       //
     }
 }
