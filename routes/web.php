@@ -10,6 +10,7 @@ use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 
 
 /*
@@ -115,3 +116,15 @@ Route::delete('/blogs/destroy/{id}', [BlogController::class, 'destroy'])->name('
 Route::delete('/blogs/destroyAdmin/{id}', [BlogController::class, 'destroyAdmin'])->name('DestroyBlogAdmin');
 Route::get('/blogsAdmin', [BlogController::class, 'indexAdmin'])->name('IndexAdmin');
 Route::get('/blogDetails/{id}', [BlogController::class, 'show'])->name('DetailsBlog');
+
+//COMMENT
+///BLOOOG
+Route::get('/comments', [CommentController::class, 'index'])->name('Index');
+Route::get('/comments/create', [CommentController::class, 'create'])->name('CreateComment');
+Route::post('/comments/store', [CommentController::class, 'store'])->name('StoreComment');
+Route::get('/comments/edit/{id}', [CommentController::class, 'edit'])->name('EditComment');
+Route::post('/comments/update/{id}', [CommentController::class, 'update'])->name('UpdateComment');
+Route::delete('/comments/destroy/{id}', [CommentController::class, 'destroy'])->name('DestroyComment');
+Route::delete('/comments/destroyAdmin/{id}', [CommentController::class, 'destroyAdmin'])->name('DestroyCommentAdmin');
+Route::get('/commentsAdmin', [CommentController::class, 'indexAdmin'])->name('IndexAdmin');
+Route::get('/commentDetails/{id}', [CommentController::class, 'show'])->name('DetailsComment');
