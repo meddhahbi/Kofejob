@@ -68,6 +68,10 @@ Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gi
 Route::get('/gigs/{id}', [HomeController::class, 'singleProject'])->name('gig.show');
 
 Route::post('/add-rating', [RaitingController::class, 'addRating'])->name('Raiting.store');
+Route::post('/add-rating', [RaitingController::class, 'addRating'])->name('Raiting.store');
+
+
+//Route::get('/{gigId}/ratings', [RaitingController::class,'showRating'])->name('gig.ratings');
 
 
 

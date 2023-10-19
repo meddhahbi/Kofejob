@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gig;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class GigController extends Controller
@@ -37,6 +38,7 @@ class GigController extends Controller
 
 
       $messages=$this->getMessages();
+      $loggedInUserId = Cache::get('loggedInUserId');
 
       $validator = Validator::make($request->all(),
         [
@@ -60,6 +62,7 @@ class GigController extends Controller
         'price'=>$request->price,
         'description'=> $request->description,
         'orders'=>0,
+        'user_id'=> $loggedInUserId
       ]);
 
 

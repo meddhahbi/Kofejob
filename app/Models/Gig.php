@@ -14,5 +14,6 @@ class Gig extends Model
         'description',
         'orders',
         'price',
+        'user_id'
     ];
 }
