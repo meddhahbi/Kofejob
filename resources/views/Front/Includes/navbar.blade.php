@@ -126,7 +126,9 @@
             @if ($userWithRememberToken)
 
                 <li><a href="{{ route('Front.Gig.Add') }}" class="login-btn">Post a Gig</a></li>
-                <li><a href="{{ route('logout') }}" class="logout-btn"><i class="material-icons">power_settings_new</i>Logout</li>
+
+                <li><a href="{{ route('logout') }}" class="logout-btn"><i class="material-icons">power_settings_new</i>Logout</a></li>
+                
 
             @else
 

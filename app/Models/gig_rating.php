@@ -13,4 +13,11 @@ class gig_rating extends Model
         'star_rating',
         'message',
     ];
+
+
+
+    public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
 }
