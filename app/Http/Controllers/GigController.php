@@ -148,6 +148,21 @@ class GigController extends Controller
 
     }
 
+    public function destroyGigAmin($id){
+
+      $gig = Gig::find($id);
+
+      if(!$gig){
+        return redirect()->route('HomeAdmin')->with(['errors'=>'Gig not found']);
+      }
+
+
+      $gig->delete();
+      return redirect()->route('HomeAdmin')->with(['sucess'=>'Gig deleted']);
+
+
+    }
+
 
 
 

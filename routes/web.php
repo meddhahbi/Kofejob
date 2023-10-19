@@ -49,8 +49,8 @@ Route::delete('/condidatsAdmin/destroy/{id}', [CondidatController::class, 'destr
 
 
 
-Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add');
-Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');
+Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add')->middleware(\App\Http\Middleware\CacheUserCheck::class);
+Route::post('store',[GigController::class,'store'])->name('Front.Gig.store')->middleware(\App\Http\Middleware\CacheUserCheck::class);
 
 
 
@@ -61,10 +61,14 @@ Route::get('/admin/skill/{skill}/edit', [SkillController::class, 'edit'])->name(
 Route::patch('/admin/skill/{skill}', [SkillController::class, 'update'])->name('admin.skills.update');
 Route::delete('/admin/skill/{skill}', [SkillController::class, 'destroy'])->name('admin.skills.destroy');
 
-Route::get('edit/{id}',[GigController::class,'edit'])->name('Front.Gig.Edit');
-Route::post('update/{id}',[GigController::class,'update'])->name('Front.Gig.update');
-Route::get('delete/{id}',[GigController::class,'destroy'])->name('Front.Gig.delete');
-Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index');
+Route::get('edit/{id}',[GigController::class,'edit'])->name('Front.Gig.Edit')->middleware(\App\Http\Middleware\CacheUserCheck::class);
+Route::post('update/{id}',[GigController::class,'update'])->name('Front.Gig.update')->middleware(\App\Http\Middleware\CacheUserCheck::class);
+Route::get('delete/{id}',[GigController::class,'destroy'])->name('Front.Gig.delete')->middleware(\App\Http\Middleware\CacheUserCheck::class);
+Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index')->middleware(\App\Http\Middleware\CacheUserCheck::class);
+
+
+
+
 Route::get('/gigs/{id}', [HomeController::class, 'singleProject'])->name('gig.show');
 
 Route::post('/add-rating', [RaitingController::class, 'addRating'])->name('Raiting.store');
