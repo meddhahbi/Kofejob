@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -86,8 +87,9 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::findOrFail($id);
-        return view('Front.blog.details',compact('blog'));
-    }
+        $comments = Comment::where('blog_id', $id)->get();
+        return view('Front.blog.details', compact('blog', 'comments'));
+    }   
 
     /**
      * Show the form for editing the specified resource.
