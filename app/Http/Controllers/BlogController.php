@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -17,7 +18,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blog = Blog::all();
+        $blog    = Blog::with('author')->get();
+
         return view('Front.blog.index', compact('blog'));
     }
 
@@ -51,32 +53,37 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'titre' => 'required',
-            'description' => 'required',
-            'auteur' => 'required',
-        ]);
-        $path = public_path('../public/uploads');
+{
+    $request->validate([
+        'titre' => 'required',
+        'description' => 'required',
+        'image' => 'required',
+    ]);
 
-        if ( ! file_exists($path) ) {
-            mkdir($path, 0777, true);
-        }
+    // Retrieve the loggedInUserId from the cache or use a default value of 0
+    $userID = Cache::get('loggedInUserId', 0);
 
-        $file = $request->file('image');
+    $path = public_path('../public/uploads');
 
-        $fileName = $file->getClientOriginalName();
-        $file->move($path, $fileName);
-        
-        Blog::create([
-            'titre' => $request->titre,
-            'description' => $request->description,
-            'auteur' => $request->auteur,
-             'image' => $fileName, 
-        ]);
-
-        return redirect()->route('Index')->with('success','Blog has been created successfully.');
+    if (!file_exists($path)) {
+        mkdir($path, 0777, true);
     }
+
+    $file = $request->file('image');
+
+    $fileName = $file->getClientOriginalName();
+    $file->move($path, $fileName);
+
+    Blog::create([
+        'titre' => $request->titre,
+        'description' => $request->description,
+        'auteur' => $userID,
+        'image' => $fileName,
+    ]);
+
+    return redirect()->route('Index')->with('success', 'Blog has been created successfully.');
+}
+
 
     /**
      * Display the specified resource.
