@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gig;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class GigController extends Controller
@@ -37,6 +38,7 @@ class GigController extends Controller
 
 
       $messages=$this->getMessages();
+      $loggedInUserId = Cache::get('loggedInUserId');
 
       $validator = Validator::make($request->all(),
         [
@@ -60,6 +62,7 @@ class GigController extends Controller
         'price'=>$request->price,
         'description'=> $request->description,
         'orders'=>0,
+        'user_id'=> $loggedInUserId
       ]);
 
 
@@ -141,6 +144,21 @@ class GigController extends Controller
 
       $gig->delete();
       return redirect()->route('Front.Gig.index')->with(['sucess'=>'Gig deleted']);
+
+
+    }
+
+    public function destroyGigAmin($id){
+
+      $gig = Gig::find($id);
+
+      if(!$gig){
+        return redirect()->route('HomeAdmin')->with(['errors'=>'Gig not found']);
+      }
+
+
+      $gig->delete();
+      return redirect()->route('HomeAdmin')->with(['sucess'=>'Gig deleted']);
 
 
     }

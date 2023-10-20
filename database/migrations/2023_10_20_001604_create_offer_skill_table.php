@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('gigs', function (Blueprint $table) {
-            $table->dropColumn('image');
+        Schema::create('offer_skill', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('offer_id');
+            $table->unsignedBigInteger('skill_id');
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('gigs', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('offer_skill');
     }
 };

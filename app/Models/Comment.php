@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gig extends Model
+class Comment extends Model
 {
-    protected $table = 'gigs';
-
+    use HasFactory;
+    protected $table = 'comment';
+   
     protected $fillable = [
-        'title',
-        'description',
-        'orders',
-        'price',
-        'user_id'
+        'comment',
+        'user',
+        'blog_id',
+      
+       
     ];
 }

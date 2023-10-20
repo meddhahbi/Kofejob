@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\gig_rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class RaitingController extends Controller
 {
@@ -24,4 +25,19 @@ class RaitingController extends Controller
          return redirect()->back();
 
     }
+
+
+    // public function showRating($gig_id){
+        
+    //     $ratings = gig_rating::where('gig_id', $gig_id)->get();
+
+    //     // $gig_ratings = DB::table('gig_ratings')
+    //     // ->select('gig_ratings.id', 'gig_ratings.message', 'gig_ratings.created_at', 'users.name as name')
+    //     // ->join('users', 'gig_ratings.user_id', '=', 'users.id')
+    //     // ->where('gig_ratings.gig_id', $gig_id)
+    //     // ->get();
+
+    //   //  dd($ratings);
+    //      return view('Front.GigDetails', compact('ratings'));
+    // }
 }

@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::rename('table_gig_raiting', 'gig_ratings'); 
-
+        Schema::create('blog', function (Blueprint $table) {
+            $table->id();
+            $table->string('titre');
+            $table->string('description');
+            $table->string('auteur');
+            $table->string('image');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('blog');
     }
 };

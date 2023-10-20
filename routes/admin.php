@@ -25,8 +25,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
- Route::get('/',[DashboardController::class, 'index']);
+ Route::get('/',[DashboardController::class, 'index'])->name('HomeAdmin');
 
+ Route::get('delete/{id}',[GigController::class,'destroy'])->name('Admin.Gig.delete');
 
 
 

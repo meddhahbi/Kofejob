@@ -59,7 +59,7 @@ class LoginController extends Controller
 
           if ($user->isAdmin()) {
            
-            return Redirect::route('Admin.Home');
+            return Redirect::route('HomeAdmin');
         }else {
           
           return Redirect::route('Home');

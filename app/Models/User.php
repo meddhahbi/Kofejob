@@ -48,6 +48,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Skill::class);
     }
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
     public function isAdmin() {
         return $this->role === 'admin';
     }
