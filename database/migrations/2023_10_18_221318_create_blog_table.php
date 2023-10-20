@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('titre');
             $table->string('description');
-            $table->string('auteur');
+            $table->unsignedBigInteger('auteur');
             $table->string('image');
             $table->timestamps();
+
+        $table->foreign('auteur')->references('id')->on('users');
         });
     }
 

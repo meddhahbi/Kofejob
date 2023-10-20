@@ -162,8 +162,9 @@
 </div>
 </div>
 </div>
-
+<br>
 <a href="{{ route('CreateBlog') }}" class="btn btn-primary">Ajouter un article</a>
+
 <div class="content">
 <div class="container">
 <div class="row">
@@ -181,7 +182,7 @@
 <ul class="entry-meta meta-item">
 <li>
 <div class="post-author">
-<a href="developer-details.html"><img src="assets/img/img-02.jpg" alt="Post Author"> <span> {{ $b->auteur }}</span></a>
+<a href="developer-details.html"><img src="assets/img/img-02.jpg" alt="Post Author"> <span> {{ $b->author->name }}</span></a>
 </div>
 </li>
 <li><i class="far fa-clock"></i> {{$b -> created_at}}</li>
