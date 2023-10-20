@@ -31,7 +31,6 @@ class BlogController extends Controller
         $blog = Blog::all();
         return view('Front.blog.indexAdmin', compact('blog'));
     }
-    //comment for testing push 
 
   
 
