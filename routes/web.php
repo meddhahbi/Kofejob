@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GigController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\CondidatController;
 use App\Http\Controllers\LoginController;
@@ -62,6 +63,13 @@ Route::post('/admin/skill/store', [SkillController::class, 'store'])->name('admi
 Route::get('/admin/skill/{skill}/edit', [SkillController::class, 'edit'])->name('admin.skills.edit');
 Route::patch('/admin/skill/{skill}', [SkillController::class, 'update'])->name('admin.skills.update');
 Route::delete('/admin/skill/{skill}', [SkillController::class, 'destroy'])->name('admin.skills.destroy');
+
+
+//__________________Front Offers_________________________
+Route::get('/offers', [OfferController::class,'index'])->name('offers.index');
+Route::get('/offers/create', [OfferController::class,'create'])->name('offers.create');
+Route::post('/offers', [OfferController::class,'store'])->name('offers.store');
+
 
 Route::get('edit/{id}',[GigController::class,'edit'])->name('Front.Gig.Edit')->middleware(\App\Http\Middleware\CacheUserCheck::class);
 Route::post('update/{id}',[GigController::class,'update'])->name('Front.Gig.update')->middleware(\App\Http\Middleware\CacheUserCheck::class);
