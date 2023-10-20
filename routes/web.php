@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\CondidatController;
+use App\Http\Controllers\ReponseController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RaitingController;
 use App\Http\Controllers\RegisterController;
@@ -35,7 +36,12 @@ Route::get('/', [HomeController::class, 'index'])->name('Home');
 Route::get('/allgigs', [HomeController::class, 'projects'])->name('projects');
 
 
-
+Route::get('/reponses', [ReponseController::class, 'index'])->name('Admin.Reponse.index');
+Route::get('/reponses/create', [ReponseController::class, 'create'])->name('Admin.Reponse.create');
+Route::post('/reponses/store', [ReponseController::class, 'store'])->name('Admin.Reponse.store');
+Route::get('/reponses/edit/{id}', [ReponseController::class, 'edit'])->name('Admin.Reponse.edit');
+Route::post('/reponses/update/{id}', [ReponseController::class, 'update'])->name('Admin.Reponse.update');
+Route::delete('/reponses/destroy/{id}', [ReponseController::class, 'destroy'])->name('Admin.Reponse.destroy');
 
 Route::get('/condidats', [CondidatController::class, 'index'])->name('Front.Condidat.index');
 Route::get('/condidats/create', [CondidatController::class, 'create'])->name('Front.Condidat.create');
@@ -44,6 +50,8 @@ Route::get('/condidats/edit/{id}', [CondidatController::class, 'edit'])->name('F
 Route::post('/condidats/update/{id}', [CondidatController::class, 'update'])->name('Front.Condidat.update');
 Route::delete('/condidats/destroy/{id}', [CondidatController::class, 'destroy'])->name('Front.Condidat.destroy');
 
+
+Route::get('/reponses/{id}', [ReponseController::class, 'getReponsesByCondidatId'])->name('Admin.Reponse.getReponsesByCondidatId');
 
 
 Route::get('/condidatsAdmin', [CondidatController::class, 'indexx'])->name('Admin.Condidat.index');
