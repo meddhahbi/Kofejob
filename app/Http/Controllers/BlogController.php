@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -17,8 +18,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blog = Blog::all();
-        return view('Front.blog.index', compact('blog'));
+        $blog = Blog::with('author')->get();
+       $cmt = Blog::with('user')->get();
+        return view('Front.blog.index', compact('blog','user'));
     }
 
     /**
@@ -51,32 +53,43 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'titre' => 'required',
-            'description' => 'required',
-            'auteur' => 'required',
-        ]);
-        $path = public_path('../public/uploads');
+{
+    $request->validate([
+        'titre' => 'required||min:5',
+        'description' => 'required',
+        'image' => 'required',
+    ]);
 
-        if ( ! file_exists($path) ) {
-            mkdir($path, 0777, true);
-        }
+    // Retrieve the loggedInUserId from the cache 
+    $userID = Cache::get('loggedInUserId');
 
-        $file = $request->file('image');
+    $path = public_path('../public/uploads');
 
-        $fileName = $file->getClientOriginalName();
-        $file->move($path, $fileName);
-        
-        Blog::create([
-            'titre' => $request->titre,
-            'description' => $request->description,
-            'auteur' => $request->auteur,
-             'image' => $fileName, 
-        ]);
-
-        return redirect()->route('Index')->with('success','Blog has been created successfully.');
+    if (!file_exists($path)) {
+        mkdir($path, 0777, true);
     }
+
+    $file = $request->file('image');
+
+    $fileName = $file->getClientOriginalName();
+    $file->move($path, $fileName);
+
+    Blog::create([
+        'titre' => $request->titre,
+        'description' => $request->description,
+        'auteur' => $userID,
+        'image' => $fileName,
+    ]);
+
+    return redirect()->route('Index')->with('success', 'Blog has been created successfully.');
+}
+
+public function countCommentsPerBlog($blogId)
+{
+    $commentCount = Comment::where('blog_id', $blogId)->count();
+    
+    return $commentCount;
+}
 
     /**
      * Display the specified resource.
@@ -88,7 +101,8 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
         $comments = Comment::where('blog_id', $id)->get();
-        return view('Front.blog.details', compact('blog', 'comments'));
+        $commentCount = $this->countCommentsPerBlog($id);
+        return view('Front.blog.details', compact('blog', 'comments','commentCount'));
     }   
 
     /**
@@ -115,11 +129,12 @@ class BlogController extends Controller
     $request->validate([
         'titre' => 'required',
         'description' => 'required',
-        'auteur' => 'required',
+        'image' => 'required',
     ]);
 
     // Retrieve the existing blog entry by its ID
     $blog = Blog::findOrFail($id);
+    $userID = Cache::get('loggedInUserId', 0);
 
     // Check if a new image file was uploaded
     if ($request->hasFile('image')) {
@@ -139,7 +154,7 @@ class BlogController extends Controller
     // Update other fields
     $blog->titre = $request->titre;
     $blog->description = $request->description;
-    $blog->auteur = $request->auteur;
+    $blog->auteur = $userID;
 
     // Save the updated blog entry
     $blog->save();
@@ -173,4 +188,16 @@ class BlogController extends Controller
         $blog->delete();
         return redirect()->route('IndexAdmin')->with('success','Blog has been deleted successfully');
     }
+
+    protected function getMessages(){
+        return $messages=[
+         
+            'titre.required'=>'Title is required',
+            'titre.min'=>'Title should be more than 5 caracteres',
+            'description.required'=>'Description is required',
+
+
+         
+        ];
+      }
 }

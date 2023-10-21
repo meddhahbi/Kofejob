@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -48,15 +49,16 @@ class CommentController extends Controller
     public function store(Request $request)
 {
     $validatedData = $request->validate([
-        'comment' => 'required',
-        'user' => 'required',
+        'comment' => 'required|max:100',
         'blogId' => 'required',
     ]);
 
+    // Retrieve the loggedInUserId from the cache 
+    $userID = Cache::get('loggedInUserId');
 
     $comment = Comment::create([
         'comment' => $validatedData['comment'],
-        'user' => $validatedData['user'],
+        'user_id' => $userID,
         'blog_id' => $validatedData['blogId'],
     ]);
 
@@ -119,4 +121,16 @@ class CommentController extends Controller
     {
        //
     }
+
+    protected function getMessages(){
+        return $messages=[
+         
+            'comment.required'=>'Comment is required',
+            'comment.max'=>'Comment should not surpasse 100 caractere',
+ 
+         
+        ];
+      }
+
+
 }

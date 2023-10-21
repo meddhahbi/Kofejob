@@ -67,4 +67,15 @@ class User extends Authenticatable
     {
         $this->update(['remember_token' => null]);
     }
+
+    public function blogs()
+{
+    return $this->hasMany(Blog::class, 'auteur'); 
+}
+
+public function comments()
+{
+    return $this->hasMany(Comment::class, 'user_id');
+}
+
 }

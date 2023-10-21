@@ -18,4 +18,15 @@ class Blog extends Model
         'image',
        
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'blog_id');
+    }
+
+    
+public function author()
+{
+    return $this->belongsTo(User::class, 'auteur'); 
+}
 }

@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blog', function (Blueprint $table) {
+        Schema::create('condidat', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
-            $table->string('description');
-            $table->unsignedBigInteger('auteur');
-            $table->string('image');
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('email');
+            $table->text('lettreMotivation');
             $table->timestamps();
-
-        $table->foreign('auteur')->references('id')->on('users');
+            $table->unsignedBigInteger('offers_id');
+            $table->foreign('offers_id')->references('id')->on('offers'); 
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog');
+        Schema::dropIfExists('condidat');
     }
 };
