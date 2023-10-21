@@ -55,13 +55,13 @@ class BlogController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'titre' => 'required',
+        'titre' => 'required||min:5',
         'description' => 'required',
         'image' => 'required',
     ]);
 
-    // Retrieve the loggedInUserId from the cache or use a default value of 0
-    $userID = Cache::get('loggedInUserId', 0);
+    // Retrieve the loggedInUserId from the cache 
+    $userID = Cache::get('loggedInUserId');
 
     $path = public_path('../public/uploads');
 
@@ -122,11 +122,12 @@ class BlogController extends Controller
     $request->validate([
         'titre' => 'required',
         'description' => 'required',
-        'auteur' => 'required',
+        'image' => 'required',
     ]);
 
     // Retrieve the existing blog entry by its ID
     $blog = Blog::findOrFail($id);
+    $userID = Cache::get('loggedInUserId', 0);
 
     // Check if a new image file was uploaded
     if ($request->hasFile('image')) {
@@ -146,7 +147,7 @@ class BlogController extends Controller
     // Update other fields
     $blog->titre = $request->titre;
     $blog->description = $request->description;
-    $blog->auteur = $request->auteur;
+    $blog->auteur = $userID;
 
     // Save the updated blog entry
     $blog->save();
@@ -180,4 +181,16 @@ class BlogController extends Controller
         $blog->delete();
         return redirect()->route('IndexAdmin')->with('success','Blog has been deleted successfully');
     }
+
+    protected function getMessages(){
+        return $messages=[
+         
+            'titre.required'=>'Title is required',
+            'titre.min'=>'Title should be more than 5 caracteres',
+            'description.required'=>'Description is required',
+
+
+         
+        ];
+      }
 }
