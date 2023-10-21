@@ -18,9 +18,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blog    = Blog::with('author')->get();
-
-        return view('Front.blog.index', compact('blog'));
+        $blog = Blog::with('author')->get();
+       $cmt = Blog::with('user')->get();
+        return view('Front.blog.index', compact('blog','user'));
     }
 
     /**
@@ -84,6 +84,12 @@ class BlogController extends Controller
     return redirect()->route('Index')->with('success', 'Blog has been created successfully.');
 }
 
+public function countCommentsPerBlog($blogId)
+{
+    $commentCount = Comment::where('blog_id', $blogId)->count();
+    
+    return $commentCount;
+}
 
     /**
      * Display the specified resource.
@@ -95,7 +101,8 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
         $comments = Comment::where('blog_id', $id)->get();
-        return view('Front.blog.details', compact('blog', 'comments'));
+        $commentCount = $this->countCommentsPerBlog($id);
+        return view('Front.blog.details', compact('blog', 'comments','commentCount'));
     }   
 
     /**

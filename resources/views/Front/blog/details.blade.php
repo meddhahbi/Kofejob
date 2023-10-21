@@ -148,7 +148,7 @@
 </div>
 </li>
 <li><a href="#"><i class="far fa-calendar"></i>{{ $blog->created_at }}</a></li>
-<li><a href="#"><i class="far fa-comments"></i>12 Comments</a></li>
+<li><a href="#"><i class="far fa-comments"></i>{{ $commentCount }}</a></li>
 
 </ul>
 </div>
@@ -172,7 +172,7 @@
 </div>
 <div class="comment-block">
 <span class="comment-by">
-<span class="blog-author-name">{{ $comment->user }} </span>
+<span class="blog-author-name">{{ $comment->user->name }} </span>
 </span>
 <p>{{ $comment->comment }}</p>
 </div>
@@ -196,10 +196,7 @@
               <small class="form-text text-danger">{{$message}}</small>
               @enderror
         </div>
-        <div class="form-group">
-            <label for="user">user</label>
-            <input type="text" name="user" class="form-control"     >
-        </div>       
+             
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 </div>
