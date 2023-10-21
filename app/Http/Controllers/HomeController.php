@@ -53,7 +53,7 @@ class HomeController extends Controller
       
       $gig = Gig::find($id);
 
-      $ratings = gig_rating::where('id', $id)->with('user')->get();
+      $ratings = gig_rating::where('gig_id', $id)->with('user')->get();
 
       $userRating = gig_rating::where('user_id', Cache::get('loggedInUserId'))
         ->where('gig_id', $id)
@@ -62,7 +62,8 @@ class HomeController extends Controller
 
       if (!$gig) {
           return abort(404);
-      }
+      } 
+      //dd($ratings);
   
       return view('Front.GigDetails', compact('gig','userRating','ratings'));
     }
