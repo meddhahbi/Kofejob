@@ -144,7 +144,7 @@
 <ul>
 <li>
 <div class="post-author">
-<a href="developer-details.html"><img src="assets/img/img-02.jpg" alt="Post Author"><span>{{ $blog->auteur }}</span></a>
+<a href="developer-details.html"><img src="../assets/img/img-02.jpg" alt="Post Author"><span>{{ $blog->author->name }}</span></a>
 </div>
 </li>
 <li><a href="#"><i class="far fa-calendar"></i>{{ $blog->created_at }}</a></li>
@@ -168,11 +168,11 @@
 @foreach($comments as $comment)
 <div class="comment">
 <div class="comment-author">
-<img class="avatar" alt src="assets/img/img-05.jpg">
+<img class="avatar" alt src="../assets/img/img-05.jpg">
 </div>
 <div class="comment-block">
 <span class="comment-by">
-<span class="blog-author-name">{{ $comment->user }} <span class="date">Jun 6, 2021</span></span>
+<span class="blog-author-name">{{ $comment->user }} </span>
 </span>
 <p>{{ $comment->comment }}</p>
 </div>
@@ -191,11 +191,14 @@
         
         <div class="form-group">
             <label for="comment">comment </label>
-            <input type="text" name="comment" class="form-control" required>
+            <input type="text" name="comment" class="form-control" >
+            @error('comment')
+              <small class="form-text text-danger">{{$message}}</small>
+              @enderror
         </div>
         <div class="form-group">
             <label for="user">user</label>
-            <input type="text" name="user" class="form-control" required>
+            <input type="text" name="user" class="form-control"     >
         </div>       
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>

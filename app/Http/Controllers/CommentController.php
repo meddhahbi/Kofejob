@@ -48,7 +48,7 @@ class CommentController extends Controller
     public function store(Request $request)
 {
     $validatedData = $request->validate([
-        'comment' => 'required',
+        'comment' => 'required|max:100',
         'user' => 'required',
         'blogId' => 'required',
     ]);
@@ -119,4 +119,14 @@ class CommentController extends Controller
     {
        //
     }
+
+    protected function getMessages(){
+        return $messages=[
+         
+            'comment.required'=>'Comment is required',
+            'comment.max'=>'Comment should not surpasse 100 caractere',
+ 
+         
+        ];
+      }
 }
