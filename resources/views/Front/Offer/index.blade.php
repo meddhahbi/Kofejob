@@ -40,8 +40,26 @@
                                 </li>
                                 <li><i class="far fa-clock"></i> {{$offer->created_at}}</li>
                             </ul>
-                            <h3 class="blog-title"><a href="blog-details.html">{{$offer->title}}</a></h3>
+                            <h2 class="blog-title"><a href="blog-details.html">{{$offer->title}}</a></h2>
                             <p class="mb-0">{{$offer->description}}</p>
+                            <br>
+                            @if(count($offer->skills)>0)
+                            <div class="proposal-card" style="padding-left: 30px">
+                                <h5>Required Skills: </h5>
+                                <ul>
+                                    @foreach ($offer->skills as $skill)
+                                        <li><strong>{{$skill->name}}</strong></li>
+
+                                    @endforeach
+
+                                </ul>
+                            </div>
+                                @else
+                                    <strong class="warning-card">no skills required</strong>
+                            @endif
+
+
+
                         </div>
                     </div>
 
