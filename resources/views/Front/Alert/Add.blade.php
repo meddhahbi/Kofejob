@@ -47,7 +47,14 @@
                                     <div class="title-detail">
                                         <h3>Subject</h3>
                                         <div class="form-group price-cont mb-0" id="subject_type">
-                                          <input type="text" id="subject" name="subject" class="form-control" placeholder="What's the Subject">
+                                          <!-- <input type="text" id="subject" name="subject" class="form-control" placeholder="What's the Subject"> -->
+                                          <select name="subject" id="subject" class="form-control">
+    <option value="freelancer">Freelancer</option>
+    <option value="employer">Employer</option>
+    <option value="job">Job</option>
+    <option value="job">Paiement</option>
+
+</select>
                                           @error('subject')
                                           <small class="form-text text-danger">{{$message}}</small>
                                       @enderror

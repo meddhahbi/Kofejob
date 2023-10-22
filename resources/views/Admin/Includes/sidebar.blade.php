@@ -13,6 +13,9 @@
                     <a href="{{route('admin.gigs')}}"><i data-feather="database"></i> <span>Gigs</span></a>
                 </li>
                 <li>
+                    <a href="{{route('admin.alerts')}}"><i data-feather="clipboard"></i> <span>Alerts</span></a>
+                </li>
+                <li>
                     <a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
                 </li>
                 <li>

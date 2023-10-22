@@ -6,10 +6,12 @@ use App\Models\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
-
+use App\Models\User;
 
 class AlertController extends Controller
 {
+  
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,12 +20,15 @@ class AlertController extends Controller
     public function index()
     {
         $alerts = Alert::all();
+    
         return view('Admin.Alerts.index', compact('alerts'));
 
     }
     public function FreelancerIndex(){
 
-      $alerts = Alert::all();
+      $userId = 1;
+      $alerts = Alert::where('user_id', $userId)->get();
+      
       return view('Front.Alert.index', compact('alerts'));
 
     }
@@ -50,9 +55,9 @@ class AlertController extends Controller
 
         $validator = Validator::make($request->all(),
           [
-            'title'=>'required|max:40',
-            'subject'=>'required|max:40',
-            'description'=>'required'
+            'title'=>'required|min:3|regex:/^[A-Za-z\s]+$/',
+            'subject'=>'required|max:10|regex:/^[A-Za-z\s]+$/',
+            'description'=>'required|min:5'
           ],
           $messages
           );
@@ -63,18 +68,20 @@ class AlertController extends Controller
             return redirect()->back()->withErrors($validator)->withInputs($request->all());
           }
   
-  
+          $user = User::where('id',1)->first();
+
   
         Alert::create([
           'title'=> $request->title ,
           'subject'=>$request->subject,
           'description'=> $request->description,
           'status'=>"pending",
+          'user_id'=>$user->id,
         ]);
   
   
       
-           return redirect()->route('Home')->with(['success'=>'Alert Added']);
+           return redirect()->route('Front.Alerts.index')->with(['success'=>'Alert Added']);
     }
     protected function getMessages(){
         return $messages=[
@@ -82,9 +89,13 @@ class AlertController extends Controller
             'title.required'=>'The Title is required',
             
             'description.required'=>'Description is required',
-            'title.max'=>'Max of caracters 40',
+            'description.min'=>'Minimum of 5 caracters',
+
+            'title.min'=>'Minimum of 3 caracters',
             'subject.required'=>'Subject is required',
-            'subject.max'=>'Max of caracters 40',
+            'subject.max'=>'Max of caracters 10',
+            'title.regex' => 'The Title should not contain numbers',
+
          
         ];
       }
@@ -124,9 +135,8 @@ class AlertController extends Controller
 
     $request->validate([
         'title' => 'required|string|max:255',
-        'subject' => 'required|string|max:255',
+        'subject' => 'required|string|max:255|regex:/^[A-Za-z\s]+$/',
         'description' => 'required|string',
-        // Add validation rules for other fields if needed
     ]);
 
     $alert->update($request->all());

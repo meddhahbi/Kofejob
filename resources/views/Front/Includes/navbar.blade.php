@@ -111,7 +111,7 @@
     </li> <li class="has-submenu">
     <a href>Alert <i class="fas fa-chevron-down"></i></a>
     <ul class="submenu">
-    <li><a href="{{route('Front.Alert.Add')}}">My Alert</a></li>
+    <li><a href="{{route('Front.Alerts.index')}}">My Alert</a></li>
     <li><a href="{{route('Front.Alert.Add')}}">Add Alert</a></li>
   
     </ul>

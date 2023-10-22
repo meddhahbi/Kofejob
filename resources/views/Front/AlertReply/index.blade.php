@@ -17,7 +17,7 @@
             </div>
         </div>
         <nav class="user-tabs project-tabs">
-            <a class="nav-link active" href="manage-projects.html">My Alerts</a>
+            <a class="nav-link active" href="manage-projects.html">My Alert's Reply</a>
             <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
                 <li class="nav-item">
                 </li>
@@ -25,9 +25,7 @@
         </nav>
 
 
-        @isset($alerts)
-
-        @foreach ($alerts as $alert)
+       
 
         <div class="row">
         <div class="my-projects-list">
@@ -35,37 +33,24 @@
                     <div class="projects-card flex-fill">
                         <div class="card-body">
                             <div class="projects-details align-items-center">
-                                <div class="project-info">
-                                    <span> {{$alert->subject}} </span>
-                                    <h2>{{$alert->title}}</h2>
-                                    <div class="customer-info">
-                                        <ul class="list-details">
-                                         
-                                            <li>
-                                                <div class="slot">
-                                                    <p>Created</p>
-                                                    <h5>{{$alert->created_at}}</h5>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                <div class="project-info  ">
+                                    <span>Description</span>
+                                    @if($reply)
+                                    <h2>{{$reply->description}}</h2>
+                                     @else
+                                        <h2>Not Replied Yet</h2>
+                                        @endif
                                     
                                 </div>
-                                <div class="project-hire-info">
+                                <div class="project-hire-info  "> @if($reply)
                                     <div class="content-divider"></div>
                                     <div class="projects-amount">
-                                        <h3>Description</h3>
-                                        <h5>  {{$alert->description}}</h5>
+                                        <h3>Replied at</h3>
+                                        <h5>  {{$reply->created_at}}</h5>
                                         
-                                    </div>
+                                      </div>
                                     
-                                    <div class="content-divider"></div>
-                                    <div class="projects-action text-center">
-                                        <a href="{{route('Front.Alerts.edit', ['id' => $alert->id])}}" class="projects-btn">Edit Alert </a>
-                                        
-                                        <a href="{{route('Front.reply.show', ['id' => $alert->id])}}"    class="hired-detail"><span> {{$alert->status}} </span></a>
-                                    </div>
-                                </div>
+                                  @endif
                             </div>
                         </div>
                     </div>
@@ -85,8 +70,7 @@
         </div>
 
 
-        @endforeach 
-        @endisset
+   
 
         <div class="row">
             <div class="col-md-12">

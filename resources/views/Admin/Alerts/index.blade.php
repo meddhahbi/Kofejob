@@ -79,6 +79,8 @@
                                             <th></th>
                                             <th>Title</th>
                                             <th>Subject</th>
+                                            <th>User Name</th>
+                                            <th>User Email</th>
                                             <th>Description</th>
                                             <th>Creation Date</th>
                                             <th>Status</th>
@@ -101,6 +103,8 @@
                                             <td>
                                             {{$alert->subject}}
                                             </td>
+                                            <td>{{$alert->user->name}}</td>
+                                            <td>{{$alert->user->email}}</td>
                                             <td>
                                                 {{$alert->description}}
                                             </td>
@@ -113,9 +117,12 @@
                                                 <a   class="btn btn-sm btn-danger"
                                                     data-bs-toggle="modal" data-bs-target="#delete_category"><i
                                                         class="far fa-trash-alt"></i></a>
+                                                        <a  href="{{route('admin.alerts.reply', ['id' => $alert->id])}}" class="btn btn-sm btn-warning"
+                                                    ><i
+                                                        class="far fa-envelope"></i></a>
                                                          </td>
                                         </tr>
-                                        <div class="modal custom-modal fade" id="delete_category" role="dialog">
+    <div class="modal custom-modal fade" id="delete_category" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">

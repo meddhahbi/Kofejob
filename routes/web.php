@@ -4,6 +4,7 @@ use App\Http\Controllers\GigController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AlertController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\replyalertController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::get('/', [HomeController::class, 'index'])->name('Home');
 Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add');
 Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');
 Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index');
+Route::get('/alertReply/{id}',[replyalertController::class, 'indexForFreelancers'])->name('Front.reply.show');
 
 
 

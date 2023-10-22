@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('alerts', function (Blueprint $table) {
+        Schema::create('alert_reply', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+          
             $table->string('description');
-            $table->string('subject');
-            $table->string('status');
+        
             $table->timestamps();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('alert_id')->constrained('alerts')->onDelete('cascade');
         });
     }
+
+  
 
     /**
      * Reverse the migrations.
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alerts');
+        Schema::dropIfExists('alert_reply');
     }
 };
