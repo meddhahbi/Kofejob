@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Reponse;
 use App\Models\Condidat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ReponseController extends Controller
 {
@@ -22,13 +23,16 @@ class ReponseController extends Controller
     public function store(Request $request)
     {
         $request->validate(Reponse::getRules());
+        $userID = Cache::get('loggedInUserId');
 
         $reponse = new Reponse([
             'contenu' => $request->contenu,
+            'user_id' => $userID
         ]);
 
         $condidat = Condidat::find($request->condidat_id);
         $condidat->reponses()->save($reponse);
+
 
         return redirect()->route('Admin.Reponse.index')->with('success', 'Réponse créée avec succès');
     }
@@ -69,7 +73,7 @@ public function update(Request $request, $id)
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    
+
 
 
 }

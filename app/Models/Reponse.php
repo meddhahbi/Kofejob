@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reponse extends Model
 {
-    protected $fillable = ['contenu', 'condidat_id'];
+    protected $fillable = ['contenu', 'condidat_id','user_id'];
 
     public static $rules = [
-        'contenu' => 'required|string', 
-        'condidat_id' => 'required|exists:condidat,id', 
+        'contenu' => 'required|string',
+        'condidat_id' => 'required|exists:condidat,id',
     ];
 
     public function condidat()
@@ -33,5 +33,9 @@ class Reponse extends Model
         }
 
         return $rules;
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

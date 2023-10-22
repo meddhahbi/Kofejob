@@ -45,7 +45,7 @@
                                 <div class="container">
                                     @foreach ($skills as $skill)
                                         <input type="checkbox" name="skills[]" value="{{ $skill->id }}" class="btn-check" id="{{$skill->id}}" autocomplete="off"/>
-                                        <label class="btn btn-sm btn-outline-danger" for="{{$skill->id}}">{{ $skill->name }}</label>
+                                        <label class="btn btn-sm btn-outline-danger" for="{{$skill->id}}"><strong>{{ $skill->name }}</strong></label>
                                     @endforeach
                                 </div>
 {{--                                <select name="skills[]" id="skills" class="form-control" multiple>--}}

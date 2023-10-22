@@ -6,10 +6,10 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Liste des candidats</h3>
+                    <h3 class="page-title">Liste des candidatures</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Candidats</li>
+                        <li class="breadcrumb-item active">Candidatures</li>
                     </ul>
                 </div>
             </div>

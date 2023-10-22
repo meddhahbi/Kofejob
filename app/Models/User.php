@@ -71,12 +71,20 @@ class User extends Authenticatable
 
     public function blogs()
 {
-    return $this->hasMany(Blog::class, 'auteur'); 
+    return $this->hasMany(Blog::class, 'auteur');
 }
 
 public function comments()
 {
     return $this->hasMany(Comment::class, 'user_id');
+}
+public function condidats()
+{
+    return $this->hasMany(Condidat::class, 'user_id');
+}
+public function reponse()
+{
+    return $this->hasMany(Reponse::class, 'user_id');
 }
 
 }

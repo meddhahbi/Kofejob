@@ -15,7 +15,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 
 use App\Http\Controllers\AlertController;
- 
+
 use App\Http\Controllers\replyalertController;
 
 /*
@@ -39,12 +39,12 @@ Route::get('/', [HomeController::class, 'index'])->name('Home');
 Route::get('/allgigs', [HomeController::class, 'projects'])->name('projects');
 
 
-Route::get('/reponses', [ReponseController::class, 'index'])->name('Admin.Reponse.index');
-Route::get('/reponses/create', [ReponseController::class, 'create'])->name('Admin.Reponse.create');
-Route::post('/reponses/store', [ReponseController::class, 'store'])->name('Admin.Reponse.store');
-Route::get('/reponses/edit/{id}', [ReponseController::class, 'edit'])->name('Admin.Reponse.edit');
-Route::post('/reponses/update/{id}', [ReponseController::class, 'update'])->name('Admin.Reponse.update');
-Route::delete('/reponses/destroy/{id}', [ReponseController::class, 'destroy'])->name('Admin.Reponse.destroy');
+Route::get('/reponses', [ReponseController::class, 'index'])->name('Admin.Reponse.index')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/reponses/create', [ReponseController::class, 'create'])->name('Admin.Reponse.create')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::post('/reponses/store', [ReponseController::class, 'store'])->name('Admin.Reponse.store')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/reponses/edit/{id}', [ReponseController::class, 'edit'])->name('Admin.Reponse.edit')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::post('/reponses/update/{id}', [ReponseController::class, 'update'])->name('Admin.Reponse.update')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::delete('/reponses/destroy/{id}', [ReponseController::class, 'destroy'])->name('Admin.Reponse.destroy')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
 Route::get('/condidats', [CondidatController::class, 'index'])->name('Front.Condidat.index');
 Route::get('/condidats/create', [CondidatController::class, 'create'])->name('Front.Condidat.create');
@@ -52,14 +52,14 @@ Route::post('/condidats/store', [CondidatController::class, 'store'])->name('Fro
 Route::get('/condidats/edit/{id}', [CondidatController::class, 'edit'])->name('Front.Condidat.edit');
 Route::post('/condidats/update/{id}', [CondidatController::class, 'update'])->name('Front.Condidat.update');
 Route::delete('/condidats/destroy/{id}', [CondidatController::class, 'destroy'])->name('Front.Condidat.destroy');
+Route::get('/condidats/showC/{id}', [OfferController::class, 'showC'])->name('Front.Condidat.showC');
+
+Route::get('/reponses/{id}', [ReponseController::class, 'getReponsesByCondidatId'])->name('Admin.Reponse.getReponsesByCondidatId')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
 
-Route::get('/reponses/{id}', [ReponseController::class, 'getReponsesByCondidatId'])->name('Admin.Reponse.getReponsesByCondidatId');
-
-
-Route::get('/condidatsAdmin', [CondidatController::class, 'indexx'])->name('Admin.Condidat.index');
-Route::get('/condidatsAdmin/show/{id}', [CondidatController::class, 'show'])->name('Admin.Condidat.show');
-Route::delete('/condidatsAdmin/destroy/{id}', [CondidatController::class, 'destroyy'])->name('Admin.Condidat.destroy');
+Route::get('/condidatsAdmin', [CondidatController::class, 'indexx'])->name('Admin.Condidat.index')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/condidatsAdmin/show/{id}', [CondidatController::class, 'show'])->name('Admin.Condidat.show')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::delete('/condidatsAdmin/destroy/{id}', [CondidatController::class, 'destroyy'])->name('Admin.Condidat.destroy')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
 
 
@@ -68,12 +68,13 @@ Route::post('store',[GigController::class,'store'])->name('Front.Gig.store')->mi
 
 
 
-Route::get('/admin/skill',[SkillController::class,'index'])->name('admin.skills.index');
-Route::get('/admin/skill/create',[SkillController::class,'create'])->name('admin.skills.create');
-Route::post('/admin/skill/store', [SkillController::class, 'store'])->name('admin.skills.store');
-Route::get('/admin/skill/{skill}/edit', [SkillController::class, 'edit'])->name('admin.skills.edit');
-Route::patch('/admin/skill/{skill}', [SkillController::class, 'update'])->name('admin.skills.update');
-Route::delete('/admin/skill/{skill}', [SkillController::class, 'destroy'])->name('admin.skills.destroy');
+Route::get('/admin/skill',[SkillController::class,'index'])->name('admin.skills.index')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/admin/skill/create',[SkillController::class,'create'])->name('admin.skills.create')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::post('/admin/skill/store', [SkillController::class, 'store'])->name('admin.skills.store')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/admin/skill/{skill}/edit', [SkillController::class, 'edit'])->name('admin.skills.edit')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::patch('/admin/skill/{skill}', [SkillController::class, 'update'])->name('admin.skills.update')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::delete('/admin/skill/{skill}', [SkillController::class, 'destroy'])->name('admin.skills.destroy')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+
 
 
 //__________________Front Offers_________________________
@@ -140,9 +141,9 @@ Route::post('/blogs/store', [BlogController::class, 'store'])->name('StoreBlog')
 Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('EditBlog');
 Route::post('/blogs/update/{id}', [BlogController::class, 'update'])->name('UpdateBlog');
 Route::delete('/blogs/destroy/{id}', [BlogController::class, 'destroy'])->name('DestroyBlog');
-Route::delete('/blogs/destroyAdmin/{id}', [BlogController::class, 'destroyAdmin'])->name('DestroyBlogAdmin');
-Route::get('/blogsAdmin', [BlogController::class, 'indexAdmin'])->name('IndexAdmin');
-Route::get('/blogDetails/{id}', [BlogController::class, 'show'])->name('DetailsBlog');
+Route::delete('/blogs/destroyAdmin/{id}', [BlogController::class, 'destroyAdmin'])->name('DestroyBlogAdmin')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/blogsAdmin', [BlogController::class, 'indexAdmin'])->name('IndexAdmin')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/blogDetails/{id}', [BlogController::class, 'show'])->name('DetailsBlog')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
 //COMMENT
 Route::get('/comments', [CommentController::class, 'index'])->name('IndexComment');
@@ -151,8 +152,8 @@ Route::post('/comments/store', [CommentController::class, 'store'])->name('Store
 Route::get('/comments/edit/{id}', [CommentController::class, 'edit'])->name('EditComment');
 Route::post('/comments/update/{id}', [CommentController::class, 'update'])->name('UpdateComment');
 Route::delete('/comments/destroy/{id}', [CommentController::class, 'destroy'])->name('DestroyComment');
-Route::delete('/comments/destroyAdmin/{id}', [CommentController::class, 'destroyAdmin'])->name('DestroyCommentAdmin');
-Route::get('/commentsAdmin', [CommentController::class, 'indexAdmin'])->name('IndexAdminComment');
+Route::delete('/comments/destroyAdmin/{id}', [CommentController::class, 'destroyAdmin'])->name('DestroyCommentAdmin')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/commentsAdmin', [CommentController::class, 'indexAdmin'])->name('IndexAdminComment')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 Route::get('/commentDetails/{id}', [CommentController::class, 'show'])->name('DetailsComment');
 Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add');
 Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');

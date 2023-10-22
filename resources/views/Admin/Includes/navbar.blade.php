@@ -30,6 +30,10 @@
 
     <ul class="nav user-menu">
 
+        <li>
+        <li><a href="{{ route('logout') }}" class="logout-btn"><i class="material-icons">power_settings_new</i>Logout</a></li>
+        </li>
+
         <li class="nav-item dropdown">
             <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                 <i class="feather-bell"></i> <span class="badge badge-pill">5</span>

@@ -88,13 +88,13 @@
                                         @isset($gigs)
 
                                         @foreach ($gigs as $gig)
-                                            
-                                        
-                                       
+
+
+
                                         <tr>
-                                           
+
                                             <td>
-                                               
+
                                             </td>
                                             <td>{{$gig->title}}</td>
                                             <td>
@@ -105,20 +105,20 @@
                                             </td>
                                             <td>{{$gig->created_at}}</td>
                                             <td class="text-end">
-                                                <a href="{{route('Admin.Gig.delete',$gig->id)}}" class="btn btn-sm btn-danger"
+                                                <a href="{{route('Admin.Gig.delete', $gig->id)}}" class="btn btn-sm btn-danger"
                                                     data-bs-toggle="modal" data-bs-target="#delete_category"><i
                                                         class="far fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
 
-                                        @endforeach 
+                                        @endforeach
                                         @endisset
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                     
-                      
+
+
                     </div>
                 </div>
             </div>
