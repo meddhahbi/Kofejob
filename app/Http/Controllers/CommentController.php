@@ -27,7 +27,8 @@ class CommentController extends Controller
      */
     public function indexAdmin()
     {
-     //
+        $comment = Comment::all();
+        return view('Admin.comment.index', compact('comment'));
     }
 
     /**
@@ -119,7 +120,9 @@ class CommentController extends Controller
      */
     public function destroyAdmin($id)
     {
-       //
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+        return redirect()->route('IndexAdmin')->with('success','Blog has been deleted successfully');
     }
 
     protected function getMessages(){

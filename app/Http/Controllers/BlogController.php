@@ -20,7 +20,7 @@ class BlogController extends Controller
     {
         $blog = Blog::with('author')->get();
        $cmt = Blog::with('user')->get();
-        return view('Front.blog.index', compact('blog','user'));
+        return view('Front.blog.index', compact('blog','cmt'));
     }
 
     /**
@@ -31,7 +31,7 @@ class BlogController extends Controller
     public function indexAdmin()
     {
         $blog = Blog::all();
-        return view('Front.blog.indexAdmin', compact('blog'));
+        return view('Admin.blog.indexAdmin', compact('blog'));
     }
 
   
@@ -176,7 +176,7 @@ public function countCommentsPerBlog($blogId)
         return redirect()->route('Index')->with('success','Blog has been deleted successfully');
     }
 
-    /**
+     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -188,6 +188,8 @@ public function countCommentsPerBlog($blogId)
         $blog->delete();
         return redirect()->route('IndexAdmin')->with('success','Blog has been deleted successfully');
     }
+
+ 
 
     protected function getMessages(){
         return $messages=[

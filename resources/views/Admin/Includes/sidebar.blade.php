@@ -18,7 +18,7 @@
                 <li>
                 <a href="{{route('IndexAdmin')}}"><i data-feather="database"></i> <span>Blogs</span></a>              </li>
                 <li>
-                    <a href="deposit.html"><i data-feather="user-check"></i> <span>Deposit</span></a>
+                    <a href="{{route('IndexAdminComment')}}"><i data-feather="user-check"></i> <span>comment</span></a>
                 </li>
                 <li>
                     <a href="withdrawn.html"><i data-feather="user-check"></i> <span>Withdrawn</span></a>
