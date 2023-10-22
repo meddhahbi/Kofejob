@@ -15,13 +15,18 @@
         <div class="settings-menu">
             <ul>
                 <li class="nav-item">
-                    <a href="dashboard.html" class="nav-link active">
+                    <a href="dashboard.html" class="nav-link ">
                         <i class="material-icons">verified_user</i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('Front.Gig.index')}}" class="nav-link">
                         <i class="material-icons">business_center</i> Gigs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('Front.Alerts.index')}}" class="nav-link active">
+                        <i class="material-icons">record_voice_over</i> Alerts
                     </a>
                 </li>
                 <li class="nav-item">

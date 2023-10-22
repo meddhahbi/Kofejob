@@ -189,7 +189,7 @@
                                             </a>
                                         </div>
                                         <div class="profile-name">
-                                            <div class="author-location">Amaze Tech <i
+                                            <div class="author-location">{{ $gig->name }} <i
                                                     class="fas fa-check-circle text-success verified"></i></div>
                                         </div>
                                         <div class="freelance-info">
@@ -223,7 +223,7 @@
 
                                         <ul>
                                             <li>
-                                                <h3 class="counter-value">{{ $gig->created_at->format('Y-m-d') }}</h3>
+                                                <h3 class="counter-value">{{ date('F j, Y', strtotime($gig->created_at)) }}</h3>
                                                 <h5>Creation</h5>
                                             </li>
                                             <li>

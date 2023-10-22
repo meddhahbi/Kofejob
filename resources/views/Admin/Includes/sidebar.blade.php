@@ -14,14 +14,22 @@
                 </li>
                 <li>
                     <a href="{{route('projet.index')}}"><i data-feather="database"></i> <span>Projects</span></a>
+                    <a href="{{route('admin.alerts')}}"><i data-feather="clipboard"></i> <span>Alerts</span></a>
+                </li>
+                <li>
+                    <a href="users.html"><i data-feather="users"></i> <span>Freelancer</span></a>
                 </li>
                 <li>
                 <a href="{{route('IndexAdmin')}}"><i data-feather="database"></i> <span>Blogs</span></a>              </li>
                 <li>
-                    <a href="{{route('IndexAdminComment')}}"><i data-feather="user-check"></i> <span>comment</span></a>
+
+                    
+
+                    <a href="{{route('admin.skills.index')}}"><i data-feather="database"></i> <span>Skills</span></a>
+
                 </li>
                 <li>
-                    <a href="withdrawn.html"><i data-feather="user-check"></i> <span>Withdrawn</span></a>
+                    <a href="{{route('IndexAdminComment')}}"><i data-feather="user-check"></i> <span>comment</span></a>
                 </li>
                 <li>
                     <a href="transaction.html"><i data-feather="clipboard"></i> <span>Transaction</span></a>

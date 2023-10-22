@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Alert;
 
 class User extends Authenticatable
 {
@@ -48,6 +49,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Skill::class);
     }
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
     public function isAdmin() {
         return $this->role === 'admin';
     }

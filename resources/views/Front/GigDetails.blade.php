@@ -53,7 +53,8 @@
 
 
                         <div class="pro-post project-widget widget-box">
-                            <h3 class="pro-title">Raiting</h3>
+                            <h3 class="pro-title">Your Raiting</h3>
+                            @if (Cache::has('loggedInUserId'))
                             @if ($userRating)
                                 <p>You have already rated this gig.</p>
                             @else
@@ -96,9 +97,47 @@
 
                             @endif
 
+
+                            @else
+                            <p>Please log in to rate this gig.</p>
+                        @endif
+
                         </div>
 
+
+
+
+
+                        {{-- <center><div>  <a  href="{{ route('gig.ratings', ['gigId' => $gig->id]) }}" class="btn-cart" tabindex="-1">Show all ratings</a></div></center> --}}
+
+
+                        <div class="pro-post project-widget widget-box">
+                            <h3 class="pro-title">Ratings</h3>
+                            <div class="pro-content">
+                                @if ($ratings->count() > 0)
+                                    <ul style="list-style: none;">
+                                        @foreach ($ratings as $rating)
+                                            <li>
+                                                {{-- <strong>Rating:</strong> {{ $rating->gig_rating }} --}}
+
+                                                <p>
+                                                    @if ($rating->user_id == Cache::get('loggedInUserId'))
+                                                    <strong>You:</strong>
+                                                    @else
+                                                    <strong>{{ $rating->user->name }} :</strong>
+                                                    @endif
+                                                    {{ $rating->message }}</p>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p>No ratings available for this gig.</p>
+                                @endif
+                            </div>
+                        </div>
+                        
                     </div>
+                    
                 </div>
 
                 <div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar project-client-view">

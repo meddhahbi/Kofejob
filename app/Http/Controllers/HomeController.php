@@ -6,6 +6,7 @@ use App\Models\Gig;
 use App\Models\gig_rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -32,7 +33,12 @@ class HomeController extends Controller
 
 
     public function projects(){
-      $gigs = Gig::select('id','title','description','orders','price', 'created_at')->get();
+      //$gigs = Gig::select('id','title','description','orders','price', 'created_at','user_id')->get();
+
+      $gigs = DB::table('gigs')
+        ->select('gigs.id', 'gigs.title', 'gigs.description', 'gigs.orders', 'gigs.price', 'gigs.created_at', 'users.name as name')
+        ->join('users', 'gigs.user_id', '=', 'users.id')
+        ->get();
 
        return view('Front.Projects', compact('gigs'));
     }
@@ -47,6 +53,8 @@ class HomeController extends Controller
       
       $gig = Gig::find($id);
 
+      $ratings = gig_rating::where('gig_id', $id)->with('user')->get();
+
       $userRating = gig_rating::where('user_id', Cache::get('loggedInUserId'))
         ->where('gig_id', $id)
         ->first();
@@ -54,9 +62,10 @@ class HomeController extends Controller
 
       if (!$gig) {
           return abort(404);
-      }
+      } 
+      //dd($ratings);
   
-      return view('Front.GigDetails', compact('gig','userRating'));
+      return view('Front.GigDetails', compact('gig','userRating','ratings'));
     }
 
 

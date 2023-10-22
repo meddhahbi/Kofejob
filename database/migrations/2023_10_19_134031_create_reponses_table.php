@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('gigs', function (Blueprint $table) {
-            $table->dropColumn('image');
+        Schema::create('reponses', function (Blueprint $table) {
+            $table->id();
+            $table->text('contenu'); 
+            $table->unsignedBigInteger('condidat_id'); 
+            $table->timestamps();
+            $table->foreign('condidat_id')->references('id')->on('condidat'); 
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('gigs', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('reponses');
     }
 };

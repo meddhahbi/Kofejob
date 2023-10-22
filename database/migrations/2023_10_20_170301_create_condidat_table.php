@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('email');
             $table->text('lettreMotivation');
             $table->timestamps();
+            $table->unsignedBigInteger('offers_id');
+            $table->foreign('offers_id')->references('id')->on('offers'); 
         });
     }
 

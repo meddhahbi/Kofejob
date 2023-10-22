@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::rename('table_gig_raiting', 'gig_ratings'); 
-
+        Schema::create('offer_skill', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('offer_id');
+            $table->unsignedBigInteger('skill_id');
+        });
     }
 
     /**
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('offer_skill');
     }
 };

@@ -36,10 +36,10 @@
                     <a href>For Employers <i class="fas fa-chevron-down"></i></a>
                     <ul class="submenu">
                         <li class="has-submenu">
-                            <a href="#">Freelancer</a>
+                            <a href="#">Offer</a>
                             <ul class="submenu">
-                                <li><a href="developer.html">Freelancer</a></li>
-                                <li><a href="developer-details.html">Freelancer Details</a></li>
+                                <li><a href="{{route('offers.create')}}">create</a></li>
+                                <li><a href="{{route('offers.index')}}">Show me</a></li>
                             </ul>
                         </li>
                         <li><a href="dashboard.html">Dashboard</a></li>
@@ -108,6 +108,16 @@
                         <li><a href="blog-details.html">Blog Details</a></li>
                     </ul>
                 </li>
+                </li> 
+    <li class="has-submenu">
+    <a href>Alert <i class="fas fa-chevron-down"></i></a>
+    <ul class="submenu">
+    <li><a href="{{route('Front.Alerts.index')}}">My Alert</a></li>
+    <li><a href="{{route('Front.Alert.Add')}}">Add Alert</a></li>
+  
+    </ul>
+    <li>
+    </li> 
                 <li>
                     <a href="admin/index.html" target="_blank">Admin</a>
                 </li>
@@ -126,7 +136,9 @@
             @if ($userWithRememberToken)
 
                 <li><a href="{{ route('Front.Gig.Add') }}" class="login-btn">Post a Gig</a></li>
-                <li><a href="{{ route('logout') }}" class="logout-btn"><i class="material-icons">power_settings_new</i>Logout</li>
+
+                <li><a href="{{ route('logout') }}" class="logout-btn"><i class="material-icons">power_settings_new</i>Logout</a></li>
+
 
             @else
 

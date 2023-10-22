@@ -22,5 +22,9 @@ class Condidat extends Model
         'lettreMotivation' => 'required|string',
         
     ];
+    public function reponses()
+    {
+        return $this->hasMany(Reponse::class, 'condidat_id');
+    }
     
 }

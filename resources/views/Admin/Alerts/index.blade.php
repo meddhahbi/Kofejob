@@ -7,10 +7,10 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Gigs</h3>
+                        <h3 class="page-title">Alerts</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active">Gigs</li>
+                            <li class="breadcrumb-item active">Alerts</li>
                         </ul>
                     </div>
                     <div class="col-auto">
@@ -61,7 +61,7 @@
             <div class="card bg-white projects-card">
                 <div class="card-body pt-0">
                     <div class="card-header">
-                        <h5 class="card-title">Projects views</h5>
+                        <h5 class="card-title">Total Alerts</h5>
                     </div>
                     <div class="reviews-menu-links">
                         <ul role="tablist" class="nav nav-pills card-header-pills nav-justified">
@@ -78,16 +78,19 @@
                                         <tr>
                                             <th></th>
                                             <th>Title</th>
-                                            <th>Orders</th>
-                                            <th>Price</th>
+                                            <th>Subject</th>
+                                            <th>User Name</th>
+                                            <th>User Email</th>
+                                            <th>Description</th>
                                             <th>Creation Date</th>
+                                            <th>Status</th>
                                             <th class="text-end">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @isset($gigs)
+                                        @isset($alerts)
 
-                                        @foreach ($gigs as $gig)
+                                        @foreach($alerts as $alert)
                                             
                                         
                                        
@@ -96,21 +99,55 @@
                                             <td>
                                                
                                             </td>
-                                            <td>{{$gig->title}}</td>
+                                            <td>{{$alert->title}}   </td>
                                             <td>
-                                            {{$gig->orders}}
+                                            {{$alert->subject}}
                                             </td>
+                                            <td>{{$alert->user->name}}</td>
+                                            <td>{{$alert->user->email}}</td>
                                             <td>
-                                                {{$gig->price}}
+                                                {{$alert->description}}
                                             </td>
-                                            <td>{{$gig->created_at}}</td>
-                                            <td class="text-end">
-                                                <a href="{{route('Admin.Gig.delete',$gig->id)}}" class="btn btn-sm btn-danger"
-                                                    data-bs-toggle="modal" data-bs-target="#delete_category"><i
-                                                        class="far fa-trash-alt"></i></a>
-                                            </td>
-                                        </tr>
+                                            <td>{{$alert->created_at}}   </td>
+                                            <td>{{$alert->status}}
 
+                                            </td>
+                                            <td class="text-end">
+                                                
+                                                <a   class="btn btn-sm btn-danger" href="{{route('admin.alerts.delete', ['id' => $alert->id])}}"
+                                               
+                                                    > <i
+                                                        class="far fa-trash-alt"></i></a>
+                                                        <a  href="{{route('admin.alerts.reply', ['id' => $alert->id])}}" class="btn btn-sm btn-warning"
+                                                    ><i
+                                                        class="far fa-envelope"></i></a>
+                                                         </td>
+                                        </tr>
+    <div class="modal custom-modal fade" id="delete_category" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-header">
+                        <h3>Delete</h3>
+                        <p>Are you sure want to delete?</p>
+                    </div>
+                    <div class="modal-btn delete-action">
+                        <div class="row">
+                            <div class="col-6">
+                             
+                                <a href="{{route('admin.alerts.delete', ['id' => $alert->id])}}" class="btn btn-primary continue-btn">Delete</a>
+                               
+                            </div>
+                            <div class="col-6">
+                                <a href="javascript:void(0);" data-bs-dismiss="modal"
+                                    class="btn btn-primary cancel-btn"> {{$alert->id}}Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                                         @endforeach 
                                         @endisset
                                     </tbody>
@@ -128,4 +165,5 @@
     </div>
 
 
+    
 @endsection
