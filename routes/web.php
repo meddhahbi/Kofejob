@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 
+use App\Http\Controllers\AlertController;
+ 
+use App\Http\Controllers\replyalertController;
 
 /*
 |--------------------------------------------------------------------------
@@ -151,3 +154,15 @@ Route::delete('/comments/destroy/{id}', [CommentController::class, 'destroy'])->
 Route::delete('/comments/destroyAdmin/{id}', [CommentController::class, 'destroyAdmin'])->name('DestroyCommentAdmin');
 Route::get('/commentsAdmin', [CommentController::class, 'indexAdmin'])->name('IndexAdminComment');
 Route::get('/commentDetails/{id}', [CommentController::class, 'show'])->name('DetailsComment');
+Route::get('create',[GigController::class,'create'])->name('Front.Gig.Add');
+Route::post('store',[GigController::class,'store'])->name('Front.Gig.store');
+Route::get('/gigs',[GigController::class, 'indexForFreelancer'])->name('Front.Gig.index');
+Route::get('/alertReply/{id}',[replyalertController::class, 'indexForFreelancers'])->name('Front.reply.show');
+
+
+
+Route::get('createAlert',[AlertController::class,'create'])->name('Front.Alert.Add');
+Route::post('storeAlert',[AlertController::class,'store'])->name('Front.Alert.store');
+Route::get('/myAlerts',[AlertController::class, 'FreelancerIndex'])->name('Front.Alerts.index');
+Route::get('/editAlert/{id}',[AlertController::class, 'edit'])->name('Front.Alerts.edit');
+Route::put('/updateAlert/{id}',[AlertController::class, 'update'])->name('Front.Alert.update');

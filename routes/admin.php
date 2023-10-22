@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GigController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AlertController;
+use App\Http\Controllers\replyalertController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/gigs',[GigController::class, 'index'])->name('admin.gigs');
 
+Route::get('/alerts',[AlertController::class, 'index'])->name('admin.alerts');
+Route::get('/alerts/{id}',[replyalertController::class, 'index'])->name('admin.alerts.reply');
 
+Route::get('/storeReply/{id}',[replyalertController::class, 'store'])->name('admin.alerts.reply.store');
+Route::get('/deleteReply/{id}',[replyalertController::class, 'destroy'])->name('admin.reply.delete');
+
+//route to delete alert with alertId
+Route:
+
+Route::get('/deleteAlert/{id}',[replyalertController::class, 'destroy'])->name('admin.alerts.delete');
 
 
 
