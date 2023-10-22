@@ -151,17 +151,17 @@
                         <div class="col">
                             <h3 class="page-title">Comments</h3>
                             <ul class="breadcrumb">
-                            
+
                             </ul>
                         </div>
                         <div class="col-auto">
-                           
+
                         </div>
                     </div>
                 </div>
 
 
-            
+
 @if(session('status'))
     <div class="alert alert-success">{{session('status')}}</div>
                 @endif
@@ -176,7 +176,7 @@
                                         <th>Comment id</th>
                                             <th>Comment</th>
                                             <th>Author</th>
-                                            
+
 
                                             <th class="text-end">Actions</th>
                                         </tr>
@@ -208,7 +208,7 @@
     </div>
 
 
-   
+
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -222,7 +222,7 @@
 
 
             })
-           
+
         })
     </script>
 
@@ -231,7 +231,10 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
+                    @foreach($comment as $b)
                     <form action="{{ route('DestroyCommentAdmin',$b->id) }}" method="post">
+
+                        @endforeach
                         @csrf
                         @method('DELETE')
                     <div class="form-header">
@@ -255,11 +258,11 @@
                 </div>
             </div>
         </div>
-    
+
     </div>
     {{-- end delete modal --}}
 
-   
+
 
 @endsection
 

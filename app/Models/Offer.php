@@ -32,4 +32,9 @@ class Offer extends Model
     {
         return Carbon::parse($value)->format('F j, Y');
     }
+
+    public function condidat()
+    {
+        return $this->hasMany(condidat::class, 'offers_id');
+    }
 }

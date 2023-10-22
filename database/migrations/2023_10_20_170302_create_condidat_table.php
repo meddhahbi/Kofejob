@@ -21,7 +21,9 @@ return new class extends Migration
             $table->text('lettreMotivation');
             $table->timestamps();
             $table->unsignedBigInteger('offers_id');
-            $table->foreign('offers_id')->references('id')->on('offers'); 
+            $table->foreign('offers_id')->references('id')->on('offers');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

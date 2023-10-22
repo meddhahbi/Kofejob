@@ -34,7 +34,7 @@
                                             <label for="nom"><h3>Nom</h3></label>
                                             <input type="text" id="nom" name="nom" class="form-control" value="{{ $condidat->nom }}" required>
                                             @error('nom')
-                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            <small class="form-text text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
@@ -42,12 +42,12 @@
 
                                 <div class="title-content">
                                     <div class="title-detail">
-                                        
+
                                         <div class="form-group mb-0">
                                             <label for="prenom"><h3>Prénom</h3></label>
                                             <input type="text" id="prenom" name="prenom" class="form-control" value="{{ $condidat->prenom }}" required>
                                             @error('prenom')
-                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            <small class="form-text text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
@@ -55,12 +55,12 @@
 
                                 <div class="title-content">
                                     <div class="title-detail">
-                                        
+
                                         <div class="form-group mb-0">
                                             <label for="email"><h3>Email</h3></label>
                                             <input type="email" id="email" name="email" class="form-control" value="{{ $condidat->email }}" required>
                                             @error('email')
-                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            <small class="form-text text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
@@ -71,14 +71,23 @@
                                         <div class="form-group mb-0">
                                             <label for="lettreMotivation"><h3>Lettre de motivation</h3></label>
                                             <textarea id="lettreMotivation" name="lettreMotivation" class="form-control"
-                                                required>{{ $condidat->lettreMotivation }}</textarea>
+                                                      required>{{ $condidat->lettreMotivation }}</textarea>
                                             @error('lettreMotivation')
-                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            <small class="form-text text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="offers_id">Candidat</label>
+                                    <select class="form-control" id="offers_id" name="offers_id" required>
+                                        @foreach ($offers as $offers)
+                                            <option value="{{ $offers->id }}" {{ $condidat->offers_id == $offers->id ? 'selected' : '' }}>
+                                                {{ $offers->title }} {{ $offers->description }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-12 text-end">
                                         <div class="btn-item">

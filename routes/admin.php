@@ -22,19 +22,21 @@ use App\Http\Controllers\replyalertController;
 
 //     Route::get('/',[DashboardController::class, 'index']);
 
-     
+
 
 // });
 
 
- Route::get('/',[DashboardController::class, 'index'])->name('HomeAdmin');
+ Route::get('/',[DashboardController::class, 'index'])->name('HomeAdmin')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
- Route::get('delete/{id}',[GigController::class,'destroy'])->name('Admin.Gig.delete');
+ Route::get('delete/{id}',[GigController::class,'destroy'])->name('Admin.Gig.delete')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+
+Route::get('/admin/logout', [DashboardController::class, 'logout'])->name('logout.admin');
 
 
 
 //  Route::group(['middleware' => 'guest:admin'], function () {
-   
+
 //      Route::get('/login',[AdminLoginController::class, 'getLogin']);
 //      Route::post('/login',[AdminLoginController::class, 'login'])->name('admin.login');
 
@@ -43,18 +45,17 @@ use App\Http\Controllers\replyalertController;
 
 
 
-Route::get('/gigs',[GigController::class, 'index'])->name('admin.gigs');
+Route::get('/gigs',[GigController::class, 'index'])->name('admin.gigs')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
-Route::get('/alerts',[AlertController::class, 'index'])->name('admin.alerts');
-Route::get('/alerts/{id}',[replyalertController::class, 'index'])->name('admin.alerts.reply');
+Route::get('/alerts',[AlertController::class, 'index'])->name('admin.alerts')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/alerts/{id}',[replyalertController::class, 'index'])->name('admin.alerts.reply')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
-Route::get('/storeReply/{id}',[replyalertController::class, 'store'])->name('admin.alerts.reply.store');
-Route::get('/deleteReply/{id}',[replyalertController::class, 'destroy'])->name('admin.reply.delete');
+Route::get('/storeReply/{id}',[replyalertController::class, 'store'])->name('admin.alerts.reply.store')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/deleteReply/{id}',[replyalertController::class, 'destroy'])->name('admin.reply.delete')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
-//route to delete alert with alertId
-Route:
 
-Route::get('/deleteAlert/{id}',[AlertController::class, 'destroy'])->name('admin.alerts.delete');
+
+Route::get('/deleteAlert/{id}',[AlertController::class, 'destroy'])->name('admin.alerts.delete')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
 
 

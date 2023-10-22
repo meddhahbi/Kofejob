@@ -4,87 +4,98 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Condidat;
+use App\Models\Offer;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class CondidatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
-{
-    $condidats = Condidat::all();
-    return view('Front.Condidat.index', compact('condidats'));
-}
+    {
+        $condidats = Condidat::with('offers')->get();
+        return view('Front.Condidat.index', compact('condidats'));
+    }
 
-public function indexx()
-{
-    $condidatsAdmin = Condidat::all();
-    return view('Admin.Condidat.index', compact('condidatsAdmin'));
-}
+    public function create()
+    {
+        $offers = Offer::all();
+        return view('Front.Condidat.create', compact('offers'));
+    }
 
-public function create()
-{
-    return view('Front.Condidat.create');
-}
-
-public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'email' => 'required|email|unique:condidat,email|max:255',
             'lettreMotivation' => 'required|string',
+            'offers_id' => 'required|exists:offers,id',
         ]);
 
-        Condidat::create($request->all());
+        $userID = Cache::get('loggedInUserId');
+
+        $condidat = Condidat::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'lettreMotivation' => $request->lettreMotivation,
+            'offers_id' => $request->offers_id,
+            'user_id' => $userID,
+        ]);
 
         return redirect()->route('Front.Condidat.index');
     }
 
-public function show($id)
-{
-    $condidatsAdmin = Condidat::findOrFail($id);
-    return view('Admin.Condidat.show', compact('condidatsAdmin'));
-}
 
-public function edit($id)
-{
-    $condidat = Condidat::findOrFail($id);
-    return view('Front.Condidat.edit', compact('condidat'));
-}
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'nom' => 'required|string|max:255',
-        'prenom' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:condidat,email,'.$id,
-        'lettreMotivation' => 'required|string',
-    ]);
+    public function show($id)
+    {
+        $condidatsAdmin =Condidat::with('offers')->findOrFail($id);
+        return view('Admin.Condidat.show', compact('condidatsAdmin'));
+    }
 
-    $condidat = Condidat::findOrFail($id);
-    $condidat->update($request->all());
+    public function edit($id)
+    {
+        $condidat = Condidat::findOrFail($id);
+        $offers = Offer::all();
+        return view('Front.Condidat.edit', compact('condidat', 'offers'));
+    }
 
-    return redirect()->route('Front.Condidat.index');
-}
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:condidat,email,' . $id,
+            'lettreMotivation' => 'required|string',
+            'offers_id' => 'required|exists:offers,id',
+        ]);
 
-public function destroy($id)
-{
-    $condidat = Condidat::findOrFail($id);
-    $condidat->delete();
+        $condidat = Condidat::findOrFail($id);
+        $condidat->update($request->all());
 
-    return redirect()->route('Front.Condidat.index');
-}
+        return redirect()->route('Front.Condidat.index');
+    }
 
-public function destroyy($id)
-{
-    $condidat = Condidat::findOrFail($id);
-    $condidat->delete();
+    public function destroy($id)
+    {
+        $condidat = Condidat::findOrFail($id);
+        $condidat->delete();
 
-    return redirect()->route('Admin.Condidat.index');
-}
+        return redirect()->route('Front.Condidat.index');
+    }
 
+    public function indexx()
+    {
+        $condidatsAdmin = Condidat::all();
+        return view('Admin.Condidat.index', compact('condidatsAdmin'));
+    }
+
+    public function destroyy($id)
+    {
+        $condidat = Condidat::findOrFail($id);
+        $condidat->delete();
+
+        return redirect()->route('Admin.Condidat.index');
+    }
 }

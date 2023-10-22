@@ -56,6 +56,14 @@ class OfferController extends Controller
         // You can retrieve and display the offer details here
     }
 
+    public function showC($id)
+    {
+
+        $condidatsOffer = Offer::findOrFail($id);
+        return view('Front.Condidat.showC', compact('condidatsOffer'));
+
+    }
+
     public function edit($id)
     {
         // Show the form for editing an existing offer

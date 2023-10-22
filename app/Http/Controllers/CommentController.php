@@ -54,16 +54,16 @@ class CommentController extends Controller
         'blogId' => 'required',
     ]);
 
-    // Retrieve the loggedInUserId from the cache 
+    // Retrieve the loggedInUserId from the cache
     $userID = Cache::get('loggedInUserId');
-
+//dd($userID);
     $comment = Comment::create([
         'comment' => $validatedData['comment'],
         'user_id' => $userID,
         'blog_id' => $validatedData['blogId'],
     ]);
 
-   
+
     return redirect()->route('DetailsBlog', ['id' => $comment->blog_id])
         ->with('success', 'Comment has been created successfully.');
 }
@@ -122,16 +122,16 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
         $comment->delete();
-        return redirect()->route('IndexAdmin')->with('success','Blog has been deleted successfully');
+        return redirect()->route('IndexAdminComment')->with('success','Blog has been deleted successfully');
     }
 
     protected function getMessages(){
         return $messages=[
-         
+
             'comment.required'=>'Comment is required',
             'comment.max'=>'Comment should not surpasse 100 caractere',
- 
-         
+
+
         ];
       }
 
