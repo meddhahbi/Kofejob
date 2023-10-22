@@ -29,4 +29,9 @@ public function author()
 {
     return $this->belongsTo(User::class, 'auteur'); 
 }
+
+public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
 }
