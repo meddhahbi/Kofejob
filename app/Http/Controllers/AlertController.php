@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Cache;
 class AlertController extends Controller
 {
   
@@ -27,7 +27,8 @@ class AlertController extends Controller
     public function FreelancerIndex(){
 
       $userId = 1;
-      $alerts = Alert::where('user_id', $userId)->get();
+      $userID = Cache::get('loggedInUserId');
+      $alerts = Alert::where('user_id', $userID)->get();
       
       return view('Front.Alert.index', compact('alerts'));
 
@@ -67,8 +68,8 @@ class AlertController extends Controller
   
             return redirect()->back()->withErrors($validator)->withInputs($request->all());
           }
-  
-          $user = User::where('id',1)->first();
+          $userID = Cache::get('loggedInUserId');
+          $user = User::where('id',$userID)->first();
 
   
         Alert::create([

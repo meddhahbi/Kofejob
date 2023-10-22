@@ -54,7 +54,7 @@ Route::get('/deleteReply/{id}',[replyalertController::class, 'destroy'])->name('
 //route to delete alert with alertId
 Route:
 
-Route::get('/deleteAlert/{id}',[replyalertController::class, 'destroy'])->name('admin.alerts.delete');
+Route::get('/deleteAlert/{id}',[AlertController::class, 'destroy'])->name('admin.alerts.delete');
 
 
 

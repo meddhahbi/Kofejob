@@ -99,7 +99,7 @@
                                             <td>
                                                
                                             </td>
-                                            <td>{{$alert->title}}</td>
+                                            <td>{{$alert->title}}   </td>
                                             <td>
                                             {{$alert->subject}}
                                             </td>
@@ -108,14 +108,15 @@
                                             <td>
                                                 {{$alert->description}}
                                             </td>
-                                            <td>{{$alert->created_at}}</td>
+                                            <td>{{$alert->created_at}}   </td>
                                             <td>{{$alert->status}}
 
                                             </td>
                                             <td class="text-end">
                                                 
-                                                <a   class="btn btn-sm btn-danger"
-                                                    data-bs-toggle="modal" data-bs-target="#delete_category"><i
+                                                <a   class="btn btn-sm btn-danger" href="{{route('admin.alerts.delete', ['id' => $alert->id])}}"
+                                               
+                                                    > <i
                                                         class="far fa-trash-alt"></i></a>
                                                         <a  href="{{route('admin.alerts.reply', ['id' => $alert->id])}}" class="btn btn-sm btn-warning"
                                                     ><i
@@ -139,7 +140,7 @@
                             </div>
                             <div class="col-6">
                                 <a href="javascript:void(0);" data-bs-dismiss="modal"
-                                    class="btn btn-primary cancel-btn">Cancel</a>
+                                    class="btn btn-primary cancel-btn"> {{$alert->id}}Cancel</a>
                             </div>
                         </div>
                     </div>
