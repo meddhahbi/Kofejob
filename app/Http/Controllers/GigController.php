@@ -43,7 +43,7 @@ class GigController extends Controller
       $validator = Validator::make($request->all(),
         [
           'title'=>'required|max:50',
-          'price'=>'required|numeric',
+          'price'=>'required|numeric|gte:0',
           'description'=>'required'
         ],
         $messages
@@ -79,7 +79,7 @@ class GigController extends Controller
           'price.required'=>'Price is required',
           'description.required'=>'Description is required',
           'title.max'=>'Max of caracters 100',
-          'price.numeric'=>'Price is a number' 
+          'price.numeric'=>'Price is a number' ,'price.gte:0'=>'Price should be positive'
        
       ];
     }
@@ -158,7 +158,7 @@ class GigController extends Controller
 
 
       $gig->delete();
-      return redirect()->route('HomeAdmin')->with(['sucess'=>'Gig deleted']);
+      return redirect()->route('admin.gigs')->with(['sucess'=>'Gig deleted']);
 
 
     }

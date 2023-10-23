@@ -105,10 +105,13 @@
                                             </td>
                                             <td>{{$gig->created_at}}</td>
                                             <td class="text-end">
-                                                <a href="{{route('Admin.Gig.delete', $gig->id)}}" class="btn btn-sm btn-danger"
-                                                    data-bs-toggle="modal" data-bs-target="#delete_category"><i
-                                                        class="far fa-trash-alt"></i></a>
-                                            </td>
+                                                <form action="{{ route('Admingig', $gig->id) }}" method="get">
+                                                    <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </button>
+                                                    </form>
+                                                    </td>
+                                            
                                         </tr>
 
                                         @endforeach

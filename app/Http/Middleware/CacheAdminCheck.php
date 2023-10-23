@@ -30,6 +30,6 @@ class CacheAdminCheck
 
         }
 
-        return redirect('/login');
+        return redirect('/');
     }
 }

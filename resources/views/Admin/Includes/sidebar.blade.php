@@ -32,6 +32,12 @@
                     <a href="{{route('IndexAdminComment')}}"><i data-feather="user-check"></i> <span>comment</span></a>
                 </li>
                 <li>
+                    <a href="{{route('Admin.Reponse.index')}}"><i data-feather="user-check"></i> <span>Reponse</span></a>
+                </li>
+                <li>
+                    <a href="{{route('Admin.Condidat.index')}}"><i data-feather="clipboard"></i> <span>Condidature</span></a>
+                </li>
+                <li>
                     <a href="transaction.html"><i data-feather="clipboard"></i> <span>Transaction</span></a>
                 </li>
                 <li>

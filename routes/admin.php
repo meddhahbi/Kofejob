@@ -29,7 +29,7 @@ use App\Http\Controllers\replyalertController;
 
  Route::get('/',[DashboardController::class, 'index'])->name('HomeAdmin')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
- Route::get('delete/{id}',[GigController::class,'destroy'])->name('Admin.Gig.delete')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+ Route::get('delete/{id}',[GigController::class,'destroyGigAmin'])->name('Admingig')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 
 Route::get('/admin/logout', [DashboardController::class, 'logout'])->name('logout.admin');
 
