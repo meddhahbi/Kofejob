@@ -148,7 +148,7 @@ Route::post('/blogs/update/{id}', [BlogController::class, 'update'])->name('Upda
 Route::delete('/blogs/destroy/{id}', [BlogController::class, 'destroy'])->name('DestroyBlog');
 Route::delete('/blogs/destroyAdmin/{id}', [BlogController::class, 'destroyAdmin'])->name('DestroyBlogAdmin')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
 Route::get('/blogsAdmin', [BlogController::class, 'indexAdmin'])->name('IndexAdmin')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
-Route::get('/blogDetails/{id}', [BlogController::class, 'show'])->name('DetailsBlog')->middleware(\App\Http\Middleware\CacheAdminCheck::class);
+Route::get('/blogDetails/{id}', [BlogController::class, 'show'])->name('DetailsBlog');
 
 //COMMENT
 Route::get('/comments', [CommentController::class, 'index'])->name('IndexComment');

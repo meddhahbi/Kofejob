@@ -42,8 +42,8 @@
                                 <li><a href="{{route('offers.index')}}">Show me</a></li>
                             </ul>
                         </li>
+                        <li><a href="{{route('Front.Condidat.index')}}">Condidature</a></li>
                         <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="company-profile.html">My Profile</a></li>
                         <li><a href="company-details.html">Company Details</a></li>
                         <li><a href="manage-projects.html">Projects</a></li>
                         <li><a href="favourites.html">Favourites</a></li>
@@ -118,9 +118,7 @@
     </ul>
     <li>
     </li> 
-                <li>
-                    <a href="admin/index.html" target="_blank">Admin</a>
-                </li>
+              
             </ul>
         </div>
         <ul class="nav header-navbar-rht reg-head">
