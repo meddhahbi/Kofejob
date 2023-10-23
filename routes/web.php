@@ -29,6 +29,11 @@ use App\Http\Controllers\replyalertController;
 |
 */
 
+
+Route::fallback(function () {
+    return view('errors.404'); // Change 'errors.404' to match the path to your custom 404 error page
+});
+
 Route::get('/dash', function () {
     return view('Front.Dashboard');
 });
