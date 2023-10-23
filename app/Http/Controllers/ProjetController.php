@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Projet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use function redirect;
 use function response;
@@ -26,7 +27,9 @@ class ProjetController extends Controller
 
     public function index()
     {
-        $projets = Projet::all();
+        $userID = Cache::get('loggedInUserId');
+
+        $projets = Projet::where('user_id', $userID)->get();
         $categories = Category::all(); // Retrieve all categories from the database
         return view('Admin.Projet.index', compact('projets', 'categories'));
     }
@@ -77,6 +80,8 @@ class ProjetController extends Controller
 //    }
     public function store(Request $request)
     {
+        $userID = Cache::get('loggedInUserId');
+
         // Perform form validation
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
@@ -94,14 +99,16 @@ class ProjetController extends Controller
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()]);
         } else {
+            $data = $request->all();
+            $data['user_id'] = $userID;
             // If validation is successful, create the Projet and return a success response
-            Projet::create($request->all());
+            Projet::create($data);
             if ($request->ajax()) {
                 // If it's an AJAX request, return a JSON success response
                 return response()->json(['success' => true]);
             } else {
                 // If it's not an AJAX request, redirect to the 'projet' route with a success message
-                return redirect('projet')->with('status', 'Projet Added!');
+                return redirect('projetFront')->with('status', 'Projet Added!');
             }        }
 
     }

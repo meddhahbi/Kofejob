@@ -39,8 +39,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html"><img
                                             src="Assets/img/home-icon.svg" alt="Post Author"> Home</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Employee</li>
-                                <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item" aria-current="page">Projects</li>
                             </ol>
                         </nav>
                     </div>

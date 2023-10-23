@@ -322,10 +322,7 @@
                             <label>Description</label>
                             <textarea name="description" id="description" class="form-control" rows="3"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Image</label>
-                            <input name="image" type="file" id="image" class="form-control">
-                        </div>
+
 
                         <div class="mt-4">
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>

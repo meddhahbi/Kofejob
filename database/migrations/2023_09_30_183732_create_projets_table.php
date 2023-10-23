@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('logo')->nullable();
+            $table->unsignedBigInteger("user_id");
             $table->string('technology');
             $table->string('company');
             $table->date('start_date');
@@ -28,9 +29,14 @@ return new class extends Migration
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+                ->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
         });
+
     }
 
     /**
