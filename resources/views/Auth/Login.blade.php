@@ -52,7 +52,7 @@
                                     <div class="col-lg-6 login-forgot">
                                         <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>
                                     </div>
-                                    <div class="col-lg-6 dont-have">New to Kofejob? <a href="register.html">Click
+                                    <div class="col-lg-6 dont-have">New to Kofejob? <a href="/register">Click
                                             here</a></div>
                                 </div>
                             </form>

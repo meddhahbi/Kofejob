@@ -12,7 +12,7 @@
                     <h3>Manage Gigs</h3>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="post-project.html" class="btn btn-primary back-btn mb-4">Post an Offer</a>
+                    <a href="{{route('offers.create')}}" class="btn btn-primary back-btn mb-4">Post an Offer</a>
                 </div>
             </div>
         </div>
