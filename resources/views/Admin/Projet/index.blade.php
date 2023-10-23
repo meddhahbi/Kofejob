@@ -150,9 +150,9 @@
                             <a class="btn filter-btn"  id="filter_search">
                                 <i class="fas fa-filter" ></i>
                             </a>
-                            <a href="#" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-proj">
-                                <i class="fas fa-plus"></i>
-                            </a>
+{{--                            <a href="#" class="btn add-button me-2" data-bs-toggle="modal" data-bs-target="#add-proj">--}}
+{{--                                <i class="fas fa-plus"></i>--}}
+{{--                            </a>--}}
                         </div>
                     </div>
                 </div>
@@ -204,18 +204,9 @@
                         <div class="reviews-menu-links">
                             <ul role="tablist" class="nav nav-pills card-header-pills nav-justified">
                                 <li class="nav-item">
-                                    <a href="#tab-4" data-bs-toggle="tab" class="nav-link active">All (272)</a>
+                                    <a href="#tab-4" data-bs-toggle="tab" class="nav-link active">All projects</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#tab-5" data-bs-toggle="tab" class="nav-link">Active (218)</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#tab-6" data-bs-toggle="tab" class="nav-link"> In Active (03)
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#tab-7" data-bs-toggle="tab" class="nav-link">Trash (0)</a>
-                                </li>
+
                             </ul>
                         </div>
                         <div class="tab-content pt-0">
@@ -271,7 +262,7 @@
                                             <td>{{$projet->due_date}}</td>
 
                                             <td class="text-end">
-                                                <a  class="btn btn-sm btn-secondary edit-projet me-2 " data-id="{{$projet->id}}" data-bs-toggle="modal"  data-bs-target="#edit-proj"><i class="far fa-edit"></i></a>
+{{--                                                <a  class="btn btn-sm btn-secondary edit-projet me-2 " data-id="{{$projet->id}}" data-bs-toggle="modal"  data-bs-target="#edit-proj"><i class="far fa-edit"></i></a>--}}
                                                 <a  class="btn btn-sm btn-danger delete-projet"   data-id="{{$projet->id}}" data-bs-toggle="modal"data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
                                             </td>
                                         </tr>

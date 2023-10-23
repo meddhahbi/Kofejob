@@ -18,7 +18,8 @@ class Projet extends Model
         'company',
         'start_date',
         'due_date',
-        'category_id'
+        'category_id',
+        'user_id'
 
 
     ];
