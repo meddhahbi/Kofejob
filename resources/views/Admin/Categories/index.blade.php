@@ -383,14 +383,13 @@
                         <input type="hidden" id="delete_id" name="delete_id">
                     <div class="modal-btn delete-action">
 
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary continue-btn">Delete</button>
-                            </div>
-                            <div class="col-6">
-                                <button data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</button>
-                            </div>
-                        </div>
+                    <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" style="width:200px" class="btn btn-primary continue-btn">Delete</button>
+                                </div>
+                                <div class="col-6">
+                                    <button data-bs-dismiss="modal" style="width:230px" class="btn btn-primary cancel-btn">Cancel</button>
+                                </div>
 
                     </div>
                     </form>

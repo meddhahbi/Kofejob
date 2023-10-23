@@ -187,13 +187,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_id">Category:</label>
-                                <select class="form-control" name="category_id" id="category_id">
-                                    @foreach ($categories as $category)
-                                        {{--                                    <option value="{{ $category->id }}">{{ $category->name }}</option>--}}
-                                        <option value="{{ $category->id }}" {{ $projet->category_id === $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                <select name="category_id" id="category_id" class="form-control">
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ isset($projet) && $projet->category_id === $category->id ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
 
-                                    @endforeach
-                                </select>
                             </div>
 
                             <div class="form-group">
