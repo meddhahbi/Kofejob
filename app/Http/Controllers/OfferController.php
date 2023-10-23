@@ -54,6 +54,7 @@ class OfferController extends Controller
     {
         // Display a specific offer
         // You can retrieve and display the offer details here
+
     }
 
     public function showC($id)
@@ -66,6 +67,7 @@ class OfferController extends Controller
 
     public function edit($id)
     {
+        $offer = Offer::findOrFail($id);
         // Show the form for editing an existing offer
         // You may also need to retrieve a list of skills for the form
     }
